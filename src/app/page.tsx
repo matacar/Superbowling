@@ -1,32 +1,57 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site } from "@/lib/site";
+import { heroPhoto, logo, foodPhotos, galleryPhotos } from "@/lib/media";
 
 /**
- * HOME — placeholder de la Fase 0 (Cimientos).
- * Muestra el sistema de diseño, la navegación fija y el footer funcionando.
- * La Home completa (hero con video real, galería, eventos, prueba social)
- * se construye en la Fase 1.
+ * HOME — Fase 1 (marketing).
+ * Reparte las fotos reales del lugar: la pista iluminada en el hero, la cocina
+ * y el restaurante en su sección, y el resto de ambientes en la galería.
+ * Las fotos y su ubicación se definen en src/lib/media.ts (no hardcodeadas aquí).
  */
 export default function Home() {
+  const [foodHero, ...dishes] = foodPhotos;
+
   return (
     <>
-      {/* HERO */}
+      {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        {/* Fondo provisional (en F1: video/imagen real del Instagram) */}
-        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_70%_0%,rgba(245,179,1,0.18),transparent_55%),radial-gradient(100%_100%_at_0%_100%,rgba(255,61,110,0.12),transparent_50%)]" />
-        <div className="absolute inset-0 bg-ink/40" />
+        {/* Foto de fondo: las 16 pistas iluminadas */}
+        <Image
+          src={heroPhoto.src}
+          alt={heroPhoto.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        {/* Capas de oscurecido + brillo dorado de marca (legibilidad del texto) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_70%_0%,rgba(201,162,74,0.20),transparent_55%)]" />
 
         <div className="relative mx-auto w-full max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          {/* Logo real de marca. mix-blend-screen elimina el fondo negro del JPG
+              y deja flotar solo las letras doradas sobre la foto. */}
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={560}
+            height={206}
+            priority
+            className="h-auto w-[280px] max-w-full mix-blend-screen sm:w-[420px] lg:w-[480px]"
+          />
+
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
             {site.slogan}
           </p>
-          <h1 className="font-display max-w-3xl text-5xl leading-[0.95] text-cream sm:text-7xl lg:text-8xl">
+          <h1 className="font-display mt-3 max-w-3xl text-4xl leading-[1.05] text-cream sm:text-6xl">
             El lugar premium de <span className="text-accent">bolos</span> y comida
             de Medellín
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted">
-            {site.lanes} pistas profesionales, cocina de Asia y parrilla, bar de
-            cócteles y eventos inolvidables. Reserva tu pista en línea en segundos.
+            {site.lanes} pistas profesionales Brunswick, cocina de Asia y parrilla,
+            bar de cócteles y eventos inolvidables. Reserva tu pista en línea en
+            segundos.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -63,16 +88,117 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Aviso de fase (se elimina al construir la Home completa en F1) */}
+      {/* ── COCINA & RESTAURANTE ─────────────────────────────────────── */}
+      <section className="border-t border-line bg-ink">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <header className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+              Cocina & restaurante
+            </p>
+            <h2 className="font-display mt-3 text-3xl text-cream sm:text-5xl">
+              No solo se juega: se come increíble
+            </h2>
+            <p className="mt-4 text-muted">
+              Cocina de Asia, parrilla y bar de cócteles para acompañar cada
+              chuza. Ideal para una cita, un plan con amigos o cerrar un negocio.
+            </p>
+          </header>
+
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            {/* Foto grande de la sección */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-brand)] lg:row-span-2 lg:aspect-auto">
+              <Image
+                src={foodHero.src}
+                alt={foodHero.alt}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
+            {/* Mosaico de platos */}
+            <div className="grid grid-cols-2 gap-4">
+              {dishes.map((photo) => (
+                <div
+                  key={photo.src}
+                  className="relative aspect-square overflow-hidden rounded-[var(--radius-brand)]"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <Link
+              href="/carta"
+              className="inline-flex rounded-[var(--radius-brand)] border border-line px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-accent hover:text-accent"
+            >
+              Ver la carta
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── GALERÍA ──────────────────────────────────────────────────── */}
       <section className="border-t border-line bg-surface">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-          <p className="text-sm text-muted">
-            <span className="font-semibold text-accent">Fase 0 — Cimientos.</span>{" "}
-            Navegación fija con CTA persistente, footer global y sistema de diseño
-            (tokens) listos. Las secciones de marketing (carta, eventos, nosotros,
-            galería real) y el sistema de reservas con maqueta de pistas se
-            construyen en las fases siguientes.
-          </p>
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <header className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+              El lugar
+            </p>
+            <h2 className="font-display mt-3 text-3xl text-cream sm:text-5xl">
+              Un espacio para vivirlo
+            </h2>
+            <p className="mt-4 text-muted">
+              Pistas de neón, zonas lounge, billar, salas para eventos y rincones
+              hechos para la foto.
+            </p>
+          </header>
+
+          {/* Masonry por columnas: respeta proporciones variadas de cada foto. */}
+          <div className="mt-10 [column-fill:_balance] gap-4 sm:columns-2 lg:columns-3">
+            {galleryPhotos.map((photo) => (
+              <div
+                key={photo.src}
+                className="group mb-4 overflow-hidden rounded-[var(--radius-brand)] break-inside-avoid"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={800}
+                  height={600}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA FINAL ────────────────────────────────────────────────── */}
+      <section className="border-t border-line bg-ink">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div>
+            <h2 className="font-display text-3xl text-cream sm:text-4xl">
+              ¿Listo para tu próxima chuza?
+            </h2>
+            <p className="mt-2 text-muted">
+              Asegura tu pista con un anticipo. Confirmación inmediata.
+            </p>
+          </div>
+          <Link
+            href="/reservar/pista"
+            className="rounded-[var(--radius-brand)] bg-accent px-8 py-4 text-base font-semibold text-accent-ink transition-transform hover:scale-[1.03] active:scale-95"
+          >
+            Reservar pista
+          </Link>
         </div>
       </section>
     </>

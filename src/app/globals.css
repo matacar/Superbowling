@@ -12,10 +12,11 @@
   --color-surface-2: #161619; /* paneles elevados */
   --color-line: #26262b; /* bordes sutiles */
 
-  /* Acento — [POR CONFIRMAR] se fija desde el logo real */
-  --color-accent: #f5b301; /* ámbar/dorado vibrante (provisional) */
-  --color-accent-ink: #1a1300; /* texto sobre el acento */
-  --color-accent-2: #ff3d6e; /* secundario opcional (provisional) */
+  /* Acento — DEFINITIVO, tomado del logo (letras metálicas doradas
+     "SUPER BOWLING" sobre negro). Marca monocroma negro + oro/champaña. */
+  --color-accent: #c9a24a; /* oro de marca (base) */
+  --color-accent-ink: #16120a; /* texto sobre el acento */
+  --color-accent-2: #e9d29a; /* champaña claro — brillo metálico para degradados */
 
   /* Texto */
   --color-cream: #ffffff;
@@ -26,10 +27,11 @@
   --color-lane-held: #f59e0b; /* bloqueada temporalmente */
   --color-lane-booked: #3f3f46; /* reservada/pagada */
 
-  /* Tipografías — [POR CONFIRMAR] contra el logo.
-     Las variables --font-* las inyecta next/font en el layout. */
+  /* Tipografías — DEFINITIVAS. Display = Cinzel (mayúsculas romanas tipo
+     Trajan, fiel al logo). Cuerpo = Inter. Las variables --font-* las
+     inyecta next/font en el layout. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display-src), var(--font-inter), sans-serif;
+  --font-display: var(--font-display-src), Georgia, "Times New Roman", serif;
 
   /* Radios y sombras de marca */
   --radius-brand: 0.875rem;

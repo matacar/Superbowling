@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Bebas_Neue } from "next/font/google";
+import { Inter, Cinzel } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,15 +7,15 @@ import FloatingReserve from "@/components/FloatingReserve";
 import { site } from "@/lib/site";
 
 // Tipografías — inyectan las variables CSS que consume el sistema de tokens.
-// [POR CONFIRMAR] el display definitivo se ajustará al logo de la marca.
+// Display = Cinzel: mayúsculas romanas de serifa alta, fieles al logo de marca.
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
-const display = Bebas_Neue({
+const display = Cinzel({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "600", "700", "900"],
   variable: "--font-display-src",
   display: "swap",
 });

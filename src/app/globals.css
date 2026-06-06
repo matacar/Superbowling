@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────
+   DESIGN TOKENS — Super Bowling Medellín
+   Fuente única de verdad de marca. Cambiar aquí ajusta todo el sitio.
+   Tailwind v4 genera utilidades (bg-*, text-*, font-*) desde estos tokens.
+   ────────────────────────────────────────────────────────────── */
+@theme {
+  /* Marca — base negra */
+  --color-ink: #000000; /* fondo/identidad principal */
+  --color-surface: #0e0e10; /* paneles */
+  --color-surface-2: #161619; /* paneles elevados */
+  --color-line: #26262b; /* bordes sutiles */
+
+  /* Acento — [POR CONFIRMAR] se fija desde el logo real */
+  --color-accent: #f5b301; /* ámbar/dorado vibrante (provisional) */
+  --color-accent-ink: #1a1300; /* texto sobre el acento */
+  --color-accent-2: #ff3d6e; /* secundario opcional (provisional) */
+
+  /* Texto */
+  --color-cream: #ffffff;
+  --color-muted: #a1a1aa;
+
+  /* Estados de la maqueta de pistas (F2) */
+  --color-lane-free: #22c55e; /* disponible */
+  --color-lane-held: #f59e0b; /* bloqueada temporalmente */
+  --color-lane-booked: #3f3f46; /* reservada/pagada */
+
+  /* Tipografías — [POR CONFIRMAR] contra el logo.
+     Las variables --font-* las inyecta next/font en el layout. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-src), var(--font-inter), sans-serif;
+
+  /* Radios y sombras de marca */
+  --radius-brand: 0.875rem;
+  --shadow-glow: 0 0 0 1px var(--color-line), 0 20px 60px -20px rgb(0 0 0 / 0.8);
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Foco accesible visible y de marca */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respeta usuarios que reducen el movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Utilidad: texto display de marca */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}

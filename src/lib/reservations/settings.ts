@@ -136,6 +136,34 @@ export function priceForTurns(
   return { total, deposit: calcDeposit(total, s) };
 }
 
+/** Subconjunto de la configuración seguro para enviar al navegador. */
+export type PublicConfig = {
+  laneCount: number;
+  maxPlayersPerLane: number;
+  durationMinutes: number;
+  minTurns: number;
+  maxTurns: number;
+  holdMinutes: number;
+  currency: "COP";
+  pricePerTurn: number;
+  deposit: { mode: "percent" | "fixed"; value: number };
+};
+
+/** Configuración pública que consume el asistente de reserva en el cliente. */
+export function publicConfig(s: Settings = getSettings()): PublicConfig {
+  return {
+    laneCount: s.venue.laneCount,
+    maxPlayersPerLane: s.venue.maxPlayersPerLane,
+    durationMinutes: s.turn.durationMinutes,
+    minTurns: s.turn.minTurns,
+    maxTurns: s.turn.maxTurns,
+    holdMinutes: s.booking.holdMinutes,
+    currency: s.pricing.currency,
+    pricePerTurn: s.pricing.pricePerTurn,
+    deposit: { mode: s.deposit.mode, value: s.deposit.value },
+  };
+}
+
 /** Formatea un monto en pesos colombianos. */
 export function formatCOP(amount: number): string {
   return new Intl.NumberFormat("es-CO", {

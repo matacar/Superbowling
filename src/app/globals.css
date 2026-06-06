@@ -88,7 +88,42 @@ body {
   color: var(--color-cream);
   font-size: 0.95rem;
   outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input::placeholder {
+  color: color-mix(in srgb, var(--color-muted) 70%, transparent);
 }
 .input:focus {
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+/* Entrada suave de cada paso del asistente de reserva. */
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.step-in {
+  animation: stepIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Textura de "carril" para las pistas disponibles en la maqueta. */
+.lane-boards {
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-lane-free) 22%, transparent),
+      transparent 45%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 0 1px,
+      transparent 1px 25%
+    );
 }

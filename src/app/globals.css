@@ -122,17 +122,168 @@ body {
   display: none;
 }
 
-/* Textura de "carril" para las pistas disponibles en la maqueta. */
-.lane-boards {
-  background-image:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-lane-free) 22%, transparent),
-      transparent 45%
+/* ──────────────────────────────────────────────────────────────
+   MAQUETA DE BOLERA — selector de pistas (/reservar/pista)
+   Cada pista es un SVG con superficie en perspectiva, flechas y pin deck.
+   Los estados se controlan con variables de color derivadas de los tokens.
+   ────────────────────────────────────────────────────────────── */
+.alley {
+  overflow-x: auto;
+  padding: 0.75rem 0.5rem 0.5rem;
+  border-radius: var(--radius-brand);
+  border: 1px solid var(--color-line);
+  background:
+    radial-gradient(
+      120% 55% at 50% -8%,
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      transparent 60%
     ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.06) 0 1px,
-      transparent 1px 25%
-    );
+    var(--color-ink);
+}
+.alley__lanes {
+  display: flex;
+  gap: 4px;
+  min-width: min-content;
+}
+
+.lane {
+  position: relative;
+  flex: 1 0 52px;
+  max-width: 94px;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 12px 12px 5px 5px;
+  background: transparent;
+  /* Valores por defecto = DISPONIBLE (superficie cálida tipo madera lacada). */
+  --lane-surface: color-mix(in srgb, var(--color-accent) 18%, #08080a);
+  --lane-gutter: color-mix(in srgb, var(--color-accent) 7%, #050506);
+  --lane-deck: color-mix(in srgb, var(--color-accent) 30%, #050506);
+  --lane-board: color-mix(in srgb, #ffffff 9%, transparent);
+  --lane-arrow: var(--color-accent);
+  --lane-line: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  --lane-approach: color-mix(in srgb, var(--color-accent) 12%, #050506);
+  --pin: #f4f1e8;
+  --ball: var(--color-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.lane--free {
+  cursor: pointer;
+}
+.lane--free:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 1px var(--color-accent),
+    0 14px 34px -14px color-mix(in srgb, var(--color-accent) 70%, transparent);
+}
+.lane:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+.lane--held {
+  cursor: not-allowed;
+  --lane-surface: color-mix(in srgb, var(--color-lane-held) 20%, #08080a);
+  --lane-gutter: color-mix(in srgb, var(--color-lane-held) 8%, #050506);
+  --lane-deck: color-mix(in srgb, var(--color-lane-held) 28%, #050506);
+  --lane-arrow: var(--color-lane-held);
+  --lane-line: color-mix(in srgb, var(--color-lane-held) 50%, transparent);
+  --lane-approach: color-mix(in srgb, var(--color-lane-held) 12%, #050506);
+  --pin: color-mix(in srgb, var(--color-lane-held) 60%, #ffffff);
+  --ball: var(--color-lane-held);
+}
+.lane--booked,
+.lane--blocked {
+  cursor: not-allowed;
+  opacity: 0.5;
+  --lane-surface: var(--color-surface-2);
+  --lane-gutter: #0c0c0e;
+  --lane-deck: #101013;
+  --lane-board: color-mix(in srgb, #ffffff 4%, transparent);
+  --lane-arrow: var(--color-line);
+  --lane-line: var(--color-line);
+  --lane-approach: #0d0d10;
+  --pin: color-mix(in srgb, var(--color-muted) 55%, transparent);
+  --ball: var(--color-line);
+}
+.lane--selected {
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 2px var(--color-accent),
+    0 16px 40px -14px color-mix(in srgb, var(--color-accent) 75%, transparent);
+  --lane-surface: color-mix(in srgb, var(--color-accent) 38%, #08080a);
+  --lane-gutter: color-mix(in srgb, var(--color-accent) 16%, #050506);
+  --lane-deck: color-mix(in srgb, var(--color-accent) 52%, #050506);
+  --lane-board: color-mix(in srgb, #ffffff 14%, transparent);
+  --lane-arrow: var(--color-accent-ink);
+  --lane-line: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  --lane-approach: color-mix(in srgb, var(--color-accent) 26%, #08080a);
+  --pin: #fffdf6;
+  --ball: var(--color-accent-ink);
+}
+.lane__art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.lane__num {
+  position: absolute;
+  inset-inline: 0;
+  top: 1.5%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+  line-height: 1;
+  color: var(--color-cream);
+  pointer-events: none;
+}
+.lane--selected .lane__num {
+  color: var(--color-accent);
+}
+.lane--booked .lane__num,
+.lane--held .lane__num {
+  color: var(--color-muted);
+}
+.lane__tag {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 1.5%;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+.lane__check {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  height: 16px;
+  width: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--color-accent-ink);
+  color: var(--color-accent);
+}
+
+/* Microinteracción: los bolos tiemblan al pasar el cursor por una pista libre. */
+@keyframes pinWobble {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-0.6px) rotate(-6deg);
+  }
+  70% {
+    transform: translateY(0) rotate(5deg);
+  }
+}
+.lane--free:hover .lane__pin {
+  animation: pinWobble 0.55s ease-in-out;
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
 }

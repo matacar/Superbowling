@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Sobre nosotros",
   description:
-    "Super Bowling Medellín: complejo de entretenimiento premium en Envigado con bolera, restaurante & bar, ahumados, hachas, tejo, billar y shows en vivo. Experiencias salvajes.",
+    "Super Bowling Medellín: complejo de entretenimiento premium en Envigado con bolera, restaurante & bar, ahumados, hachas, billar y shows en vivo. Experiencias salvajes.",
 };
 
 const offerings: { emoji: string; title: string; desc: string }[] = [
@@ -14,7 +14,6 @@ const offerings: { emoji: string; title: string; desc: string }[] = [
   { emoji: "🍽️", title: "Restaurante & bar", desc: "Cocina de Asia y parrilla, sushi de autor y coctelería ritual." },
   { emoji: "🔥", title: "Ahumados & parrilla", desc: "Cortes importados y ahumados de leña por horas." },
   { emoji: "🪓", title: "Hachas", desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro." },
-  { emoji: "🔸", title: "Tejo", desc: "El deporte nacional, con pólvora y grito de gol." },
   { emoji: "🎱", title: "Billares", desc: "Mesas para una partida tranquila o un torneo entre amigos." },
   { emoji: "🎤", title: "Shows en vivo", desc: "Música, DJ y noches que se sienten." },
   { emoji: "📺", title: "Pantalla gigante", desc: "La pantalla más grande de Medellín para vivir cada partido." },

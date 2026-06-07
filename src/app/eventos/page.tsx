@@ -7,7 +7,7 @@ import QuoteForm from "@/components/forms/QuoteForm";
 export const metadata: Metadata = {
   title: "Eventos & Experiencias",
   description:
-    "Experiencias salvajes en Super Bowling Medellín: bolera, hachas, tejo, billares, ahumados & parrilla, shows en vivo y la pantalla más grande de Medellín. Cotiza tu evento.",
+    "Experiencias salvajes en Super Bowling Medellín: bolera, hachas, billares, ahumados & parrilla, shows en vivo y la pantalla más grande de Medellín. Cotiza tu evento.",
 };
 
 type Experience = {
@@ -46,14 +46,7 @@ const experiences: Experience[] = [
     emoji: "🪓",
     title: "Hachas",
     desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro. Perfecto para retar a tu parche o romper el hielo en un evento de empresa.",
-    image: null,
-    cta: COTIZA,
-  },
-  {
-    emoji: "🔸",
-    title: "Tejo",
-    desc: "El deporte nacional, con su pólvora y su grito de gol. Tradición colombiana servida con cerveza fría y mucha adrenalina.",
-    image: null,
+    image: "/Hacha.jpg",
     cta: COTIZA,
   },
   {
@@ -74,7 +67,7 @@ const experiences: Experience[] = [
     emoji: "📺",
     title: "La pantalla más grande de Medellín",
     desc: "Vive los partidos y eventos como nunca, en una pantalla gigante con sonido envolvente. El mejor palco de la ciudad para no perderte nada.",
-    image: null,
+    image: "/Pantalla.jpg",
     cta: COTIZA,
   },
 ];
@@ -92,7 +85,7 @@ export default function EventosPage() {
         </h1>
         <p className="mt-4 max-w-xl text-lg text-muted">
           Un solo lugar, mil planes. Arma tu evento privado o corporativo y combina bolos,
-          hachas, tejo, billar, ahumados, shows en vivo y mucho más.
+          hachas, billar, ahumados, shows en vivo y mucho más.
         </p>
       </header>
 

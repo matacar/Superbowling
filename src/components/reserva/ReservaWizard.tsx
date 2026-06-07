@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { PublicConfig } from "@/lib/reservations/settings";
-import type { LaneAvailability, LaneCellStatus, Slot } from "@/lib/reservations/types";
+import type { LaneAvailability, Slot } from "@/lib/reservations/types";
+import LaneGrid from "./BowlingLaneGrid";
 
 /** Formato local en pesos (evita acoplar el cliente a settings.ts). */
 function cop(n: number): string {
@@ -426,14 +427,6 @@ function cap(s: string): string {
 
 /* ── Iconos ──────────────────────────────────────────────────────────────── */
 
-function PinIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12 2c-1.6 0-2.8 1.3-2.8 2.9 0 .9.4 1.7 1 2.3-.7 1.4-1.1 3-1.1 4.7 0 2.2.5 4.2 1.2 6 .3.8.4 1.6.4 2.4v.2c0 .8.6 1.5 1.3 1.5s1.3-.7 1.3-1.5v-.2c0-.8.1-1.6.4-2.4.7-1.8 1.2-3.8 1.2-6 0-1.7-.4-3.3-1.1-4.7.6-.6 1-1.4 1-2.3C14.8 3.3 13.6 2 12 2Z" />
-    </svg>
-  );
-}
-
 function UsersIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
@@ -762,74 +755,7 @@ function PlayerPicker({
   );
 }
 
-/* ── Paso 3: maqueta de pistas ────────────────────────────────────────────── */
-
-const CELL_BASE =
-  "group relative flex aspect-[5/8] flex-col items-center justify-between overflow-hidden rounded-t-lg rounded-b-md border pb-2 pt-2 text-sm font-semibold transition-all";
-
-const CELL_CLASS: Record<LaneCellStatus, string> = {
-  free: "lane-boards border-lane-free/40 text-cream hover:-translate-y-0.5 hover:border-lane-free",
-  held: "cursor-not-allowed border-lane-held/40 bg-lane-held/10 text-lane-held",
-  booked: "cursor-not-allowed border-line bg-surface-2/60 text-muted/50",
-  blocked: "cursor-not-allowed border-line bg-surface-2/60 text-muted/50",
-};
-
-function LaneGrid({
-  lanes,
-  selected,
-  onSelect,
-}: {
-  lanes: LaneAvailability[];
-  selected: number | null;
-  onSelect: (laneId: number) => void;
-}) {
-  return (
-    <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
-      {lanes.map((l) => {
-        const isFree = l.status === "free";
-        const isSelected = selected === l.laneId;
-        return (
-          <button
-            key={l.laneId}
-            type="button"
-            disabled={!isFree}
-            onClick={() => onSelect(l.laneId)}
-            aria-label={`Pista ${l.laneId}: ${labelFor(l.status)}`}
-            aria-pressed={isSelected}
-            className={`${CELL_BASE} ${
-              isSelected
-                ? "-translate-y-0.5 border-accent bg-accent text-accent-ink shadow-[0_8px_24px_-8px_rgba(201,162,74,0.6)]"
-                : CELL_CLASS[l.status]
-            }`}
-          >
-            {/* Pines en la cabecera del carril */}
-            <span className="flex gap-0.5 opacity-80">
-              <PinIcon className="h-2.5 w-2.5" />
-              <PinIcon className="h-2.5 w-2.5" />
-              <PinIcon className="h-2.5 w-2.5" />
-            </span>
-            <span className="font-display text-lg leading-none">{l.laneId}</span>
-            <span className="text-[9px] font-normal uppercase tracking-wide opacity-70">
-              {isSelected ? "Elegida" : shortLabel(l.status)}
-            </span>
-            {isSelected && (
-              <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent-ink text-accent">
-                <CheckIcon className="h-3 w-3" />
-              </span>
-            )}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function labelFor(s: LaneCellStatus): string {
-  return s === "free" ? "disponible" : s === "held" ? "bloqueada" : "reservada";
-}
-function shortLabel(s: LaneCellStatus): string {
-  return s === "free" ? "Libre" : s === "held" ? "Ocupada" : "Reservada";
-}
+/* ── Paso 3: leyenda de la maqueta de pistas ──────────────────────────────── */
 
 function Legend({ lanes }: { lanes: LaneAvailability[] }) {
   const freeCount = lanes.filter((l) => l.status === "free").length;
@@ -1110,10 +1036,15 @@ function PillSkeleton({ count }: { count: number }) {
 
 function LaneSkeleton() {
   return (
-    <div className="mt-5 grid grid-cols-4 gap-2 sm:grid-cols-8">
-      {Array.from({ length: 16 }).map((_, i) => (
-        <div key={i} className="aspect-[5/8] animate-pulse rounded-lg bg-surface-2" />
-      ))}
+    <div className="alley no-scrollbar mt-5">
+      <div className="alley__lanes">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div
+            key={i}
+            className="aspect-[64/220] flex-1 shrink-0 basis-[52px] animate-pulse rounded-xl bg-surface-2"
+          />
+        ))}
+      </div>
     </div>
   );
 }

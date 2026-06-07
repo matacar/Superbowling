@@ -23,7 +23,13 @@ export default function ReservarPistaPage() {
         </p>
       </header>
 
-      <div className="mt-10">
+      <p className="mt-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-muted">
+        <span className="font-semibold text-accent">Vista de demostración.</span>{" "}
+        La disponibilidad mostrada es simulada y el pago en línea (Wompi) estará disponible
+        pronto. Puedes recorrer todo el flujo: día → hora → jugadores → pista.
+      </p>
+
+      <div className="mt-8">
         <ReservaWizard />
       </div>
     </div>

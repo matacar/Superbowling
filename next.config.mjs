@@ -8,6 +8,15 @@ const nextConfig = {
       { protocol: "https", hostname: "**.fbcdn.net" },
     ],
   },
+  // Borrador: evita que cualquier ruta (HTML, PDF, API) se indexe en buscadores.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

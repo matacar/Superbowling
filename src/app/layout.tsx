@@ -51,7 +51,12 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  // Borrador privado: NO indexar en buscadores hasta que el cliente lo apruebe.
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
+  },
 };
 
 export const viewport: Viewport = {

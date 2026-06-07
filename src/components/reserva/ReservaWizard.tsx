@@ -3,7 +3,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { PublicConfig } from "@/lib/reservations/settings";
 import type { LaneAvailability, Slot } from "@/lib/reservations/types";
+import { whatsappLink } from "@/lib/contact";
 import LaneGrid from "./BowlingLaneGrid";
+
+/**
+ * Pago en línea (Wompi) habilitado. En el despliegue de demostración queda en
+ * "próximamente"; se activa poniendo NEXT_PUBLIC_PAYMENTS_ENABLED="true".
+ */
+const PAYMENTS_ENABLED = process.env.NEXT_PUBLIC_PAYMENTS_ENABLED === "true";
 
 /** Formato local en pesos (evita acoplar el cliente a settings.ts). */
 function cop(n: number): string {
@@ -934,23 +941,51 @@ function Confirmation({
 
           {payError && <p className="mt-3 text-sm text-red-300">{payError}</p>}
 
-          <div className="mt-5 flex flex-wrap justify-center gap-3 sm:justify-start">
-            <button
-              type="button"
-              disabled={expired || paying}
-              onClick={simulatePayment}
-              className="rounded-[var(--radius-brand)] bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-transform enabled:hover:scale-[1.03] enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {paying ? "Procesando…" : "Simular pago aprobado (Wompi sandbox)"}
-            </button>
-            <button
-              type="button"
-              onClick={onRestart}
-              className="rounded-[var(--radius-brand)] border border-line px-6 py-3 text-sm text-cream transition-colors hover:border-accent"
-            >
-              Nueva reserva
-            </button>
-          </div>
+          {PAYMENTS_ENABLED ? (
+            <div className="mt-5 flex flex-wrap justify-center gap-3 sm:justify-start">
+              <button
+                type="button"
+                disabled={expired || paying}
+                onClick={simulatePayment}
+                className="rounded-[var(--radius-brand)] bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-transform enabled:hover:scale-[1.03] enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {paying ? "Procesando…" : "Simular pago aprobado (Wompi sandbox)"}
+              </button>
+              <button
+                type="button"
+                onClick={onRestart}
+                className="rounded-[var(--radius-brand)] border border-line px-6 py-3 text-sm text-cream transition-colors hover:border-accent"
+              >
+                Nueva reserva
+              </button>
+            </div>
+          ) : (
+            <div className="mt-5">
+              <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-muted">
+                💳 <span className="text-cream">Pago en línea con Wompi: próximamente.</span>{" "}
+                Mientras tanto, confirma tu reserva por WhatsApp y la dejamos lista.
+              </div>
+              <div className="mt-4 flex flex-wrap justify-center gap-3 sm:justify-start">
+                <a
+                  href={whatsappLink(
+                    `Quiero confirmar mi reserva 🎳\n• Pista: ${held.laneId}\n• Fecha: ${held.date}\n• Referencia: ${held.reference}\n• Anticipo: ${cop(held.amountDeposit)} (de ${cop(held.amountTotal)})`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-[var(--radius-brand)] bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
+                >
+                  Confirmar por WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={onRestart}
+                  className="rounded-[var(--radius-brand)] border border-line px-6 py-3 text-sm text-cream transition-colors hover:border-accent"
+                >
+                  Nueva reserva
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

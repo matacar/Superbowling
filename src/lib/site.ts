@@ -42,6 +42,7 @@ export const site = {
   social: {
     instagram: "https://www.instagram.com/superbowlingmde/",
     facebook: "https://www.facebook.com/superbowlingmde/",
+    tiktok: "https://www.tiktok.com/@superbowlingmde", // [POR CONFIRMAR handle oficial]
   },
 
   // ── Sedes del grupo ──

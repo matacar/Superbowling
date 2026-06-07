@@ -113,6 +113,15 @@ body {
   animation: stepIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Oculta la barra de scroll (barra de categorías de la carta, carruseles). */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Textura de "carril" para las pistas disponibles en la maqueta. */
 .lane-boards {
   background-image:

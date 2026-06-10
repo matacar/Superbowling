@@ -58,4 +58,43 @@ Con `.env.local` lleno y las migraciones aplicadas, corre `npm run dev` y:
 
 ## 4. Crear el primer usuario administrador
 
-_(Se documentará al construir el inicio de sesión del panel — fase F-B.)_
+El panel vive en **`/admin`** (login en `/admin/login`). Solo pueden entrar los
+correos registrados en la tabla `admin_users`. Crear un administrador son dos
+pasos: crear el usuario en Supabase Auth y registrar su rol.
+
+### Opción A — script (recomendada)
+Desde la raíz del proyecto, con `.env.local` ya configurado:
+
+```bash
+node scripts/crear-admin.mjs correo@superbowling.co "ContraseñaSegura123" admin
+```
+
+El tercer argumento es el rol: `admin` (todo) o `recepcion` (operar reservas,
+sin configuración ni usuarios ni reembolsos). El script crea el usuario en Auth
+(ya confirmado) y lo registra en `admin_users`. Si el correo ya existía, solo
+asegura su rol. Para más usuarios, vuelve a ejecutarlo.
+
+### Opción B — manual desde el panel de Supabase
+1. **Authentication → Users → Add user**: crea el usuario con correo y
+   contraseña, marca *Auto Confirm User*.
+2. **Table Editor → `admin_users` → Insert row**: `email` = el mismo correo,
+   `role` = `admin` o `recepcion`.
+
+### Roles
+- **admin** — acceso total (incluye configuración, usuarios, reportes y, más
+  adelante, reembolsos).
+- **recepcion** — operar reservas del día (ver, crear manual, marcar llegada,
+  bloquear pista). No ve configuración ni gestión de usuarios.
+
+## 5. Cómo funciona la seguridad
+
+- **Inicio de sesión** con Supabase Auth (correo + contraseña).
+- **`src/proxy.ts`** (proxy/middleware de Next 16) refresca la sesión y bloquea
+  `/admin` y `/api/admin` sin sesión válida (redirige al login / responde 401).
+- **Autorización por rol en el servidor**: el layout del panel y cada acción de
+  API llaman `getAdminContext()` / `requireAdmin()` (`src/lib/auth/admin.ts`),
+  que consulta el rol en `admin_users`. Ocultar botones en la interfaz no es la
+  seguridad: la verdad está en el servidor.
+- **RLS** en la base como segunda barrera (migración 0002).
+- **Auditoría**: las acciones sensibles se registran en `audit_log` vía
+  `logAudit()`.

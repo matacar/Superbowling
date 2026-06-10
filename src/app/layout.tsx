@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Cinzel } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingReserve from "@/components/FloatingReserve";
+import SiteChrome from "@/components/SiteChrome";
 import { site } from "@/lib/site";
 
 // Tipografías — inyectan las variables CSS que consume el sistema de tokens.
@@ -71,16 +71,9 @@ export default function RootLayout({
   return (
     <html lang="es-CO" className={`${inter.variable} ${display.variable}`}>
       <body className="min-h-screen bg-ink text-cream antialiased">
-        <a
-          href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink"
-        >
-          Saltar al contenido
-        </a>
-        <Navbar />
-        <main id="contenido">{children}</main>
-        <Footer />
-        <FloatingReserve />
+        <SiteChrome footer={<Footer />} floating={<FloatingReserve />}>
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

@@ -19,9 +19,9 @@ type NavItem = {
 
 const ITEMS: NavItem[] = [
   { label: "Tablero", href: "/admin", available: true },
-  { label: "Mapa de pistas", href: "/admin/pistas", available: false },
-  { label: "Reservas", href: "/admin/reservas", available: false },
-  { label: "Pagos", href: "/admin/pagos", available: false },
+  { label: "Mapa de pistas", href: "/admin/pistas", available: true },
+  { label: "Reservas", href: "/admin/reservas", available: true },
+  { label: "Pagos", href: "/admin/pagos", available: true },
   { label: "Reportes", href: "/admin/reportes", available: false, adminOnly: true },
   { label: "Configuración", href: "/admin/configuracion", available: false, adminOnly: true },
   { label: "Usuarios", href: "/admin/usuarios", available: false, adminOnly: true },
@@ -34,7 +34,10 @@ export default function AdminNav({ role }: { role: AdminRole }) {
   return (
     <nav className="flex gap-1 overflow-x-auto px-3 py-3 md:flex-col md:overflow-visible">
       {items.map((it) => {
-        const active = pathname === it.href;
+        const active =
+          it.href === "/admin"
+            ? pathname === "/admin"
+            : pathname === it.href || pathname.startsWith(`${it.href}/`);
         const base =
           "whitespace-nowrap rounded-lg px-3 py-2 text-sm transition";
 

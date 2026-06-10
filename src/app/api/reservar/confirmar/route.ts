@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMemoryStore } from "@/lib/reservations/store/memory";
+import { getStore } from "@/lib/reservations/store";
 
 /**
  * POST /api/reservar/confirmar   { reference }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Falta reference." }, { status: 400 });
   }
 
-  const store = getMemoryStore();
+  const store = getStore();
   await store.markPendingPayment(reference);
 
   const fakeTxId = `WOMPI-SANDBOX-${reference}`;

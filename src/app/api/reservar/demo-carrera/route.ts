@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMemoryStore } from "@/lib/reservations/store/memory";
+import { getStore } from "@/lib/reservations/store";
 import type { CreateHoldInput } from "@/lib/reservations/types";
 
 /**
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Parámetros inválidos." }, { status: 400 });
   }
 
-  const store = getMemoryStore();
+  const store = getStore();
 
   // Buscamos la primera pista libre para esa franja.
   const lanes = await store.getAvailability(date, startSlot, turns);

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMemoryStore } from "@/lib/reservations/store/memory";
+import { getStore } from "@/lib/reservations/store";
 import { priceForTurns } from "@/lib/reservations/settings";
 
 /**
@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     );
   }
 
-  const store = getMemoryStore();
+  const store = getStore();
   const lanes = await store.getAvailability(date, startSlot, turns);
   const price = priceForTurns(turns);
 

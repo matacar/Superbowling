@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMemoryStore } from "@/lib/reservations/store/memory";
+import { getStore } from "@/lib/reservations/store";
 import type { CreateHoldInput } from "@/lib/reservations/types";
 
 /**
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const store = getMemoryStore();
+  const store = getStore();
   const result = await store.createHold({
     laneId,
     date,

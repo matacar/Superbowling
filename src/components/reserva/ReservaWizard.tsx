@@ -574,7 +574,7 @@ function NavButtons({
         onClick={onBack}
         className="rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:text-cream"
       >
-        ← Atrás
+        Atrás
       </button>
       <button
         type="button"

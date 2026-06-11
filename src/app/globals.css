@@ -87,18 +87,17 @@ body {
    ────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Degradado vibrante de marca: oro → champaña con un destello
-     multicolor breve. Reservado para una palabra protagonista. */
+  /* Degradado dorado de marca: champaña → oro → oro brillante. Brillo
+     metálico animado para la palabra protagonista. Solo tonos dorados. */
   --gradient-vibrant: linear-gradient(
     100deg,
     #e9d29a 0%,
-    #c9a24a 16%,
-    #ffd27a 32%,
-    #ff9ec7 44%,
-    #b98cff 52%,
-    #7ad7ff 60%,
-    #ffd27a 76%,
-    #c9a24a 100%
+    #c9a24a 22%,
+    #f6dc92 42%,
+    #fff0c2 50%,
+    #f6dc92 58%,
+    #c9a24a 78%,
+    #e9d29a 100%
   );
 }
 
@@ -145,13 +144,12 @@ body {
 }
 .reserve-btn:hover {
   transform: translateY(-2px);
-  /* Glow dorado reforzado + tinte multicolor MUY sutil. */
+  /* Glow dorado reforzado (solo tonos dorados). */
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--color-accent-2) 85%, transparent),
     0 14px 34px -10px color-mix(in srgb, var(--color-accent) 80%, transparent),
-    0 0 34px -6px color-mix(in srgb, var(--color-accent) 65%, transparent),
-    0 0 30px -4px rgba(255, 158, 199, 0.28),
-    0 0 44px -6px rgba(185, 140, 255, 0.22);
+    0 0 34px -6px color-mix(in srgb, var(--color-accent) 70%, transparent),
+    0 0 48px -8px color-mix(in srgb, var(--color-accent-2) 55%, transparent);
 }
 .reserve-btn:active {
   transform: translateY(0) scale(0.98);

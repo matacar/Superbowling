@@ -4,7 +4,7 @@
  * Las franjas seleccionables (cada 30 min) se derivan de aquí, NO se
  * hardcodean en el formulario. Editar este objeto cambia las franjas.
  *
- * Horario confirmado por el cliente (2026-06-11). Domingo pendiente.
+ * Horario confirmado por el cliente (2026-06-11).
  */
 
 import { type DayKey, dayKeyFromDate } from "@/lib/reservations/settings";
@@ -19,7 +19,7 @@ export const RESTAURANT_HOURS: Record<DayKey, OpenHours> = {
   thu: { open: "15:00", close: "24:00" }, // Jue–Vie 3:00 p. m. – 12:00 a. m.
   fri: { open: "15:00", close: "24:00" },
   sat: { open: "12:00", close: "24:00" }, // Sáb 12:00 m. – 12:00 a. m.
-  sun: null, // [POR CONFIRMAR — domingo pendiente]
+  sun: { open: "12:00", close: "21:00" }, // Dom 12:00 m. – 9:00 p. m.
 };
 
 /** Paso entre franjas, en minutos. */

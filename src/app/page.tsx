@@ -5,6 +5,7 @@ import { heroPhoto, logo, foodPhotos, galleryPhotos } from "@/lib/media";
 import ReserveButton from "@/components/ui/ReserveButton";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import StickyReserveBar from "@/components/ui/StickyReserveBar";
+import FoodCarousel from "@/components/ui/FoodCarousel";
 
 /**
  * HOME — renovación de diseño (2026-06).
@@ -13,8 +14,6 @@ import StickyReserveBar from "@/components/ui/StickyReserveBar";
  * vibrante. Las fotos y su ubicación viven en src/lib/media.ts.
  */
 export default function Home() {
-  const [foodHero, ...dishes] = foodPhotos;
-
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────────── */}
@@ -59,8 +58,7 @@ export default function Home() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ReserveButton href="/reservar/pista" size="lg" pulse>
-              Reservar pista{" "}
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              Reservar pista
             </ReserveButton>
             <Link
               href="/reservar/mesa"
@@ -104,34 +102,9 @@ export default function Home() {
             </p>
           </header>
 
-          <div className="mt-10 grid gap-4 lg:grid-cols-2">
-            {/* Foto grande de la sección */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-brand)] lg:row-span-2 lg:aspect-auto">
-              <Image
-                src={foodHero.src}
-                alt={foodHero.alt}
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
-            {/* Mosaico de platos */}
-            <div className="grid grid-cols-2 gap-4">
-              {dishes.map((photo) => (
-                <div
-                  key={photo.src}
-                  className="relative aspect-square overflow-hidden rounded-[var(--radius-brand)]"
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-              ))}
-            </div>
+          {/* Banner de imágenes que se deslizan automáticamente. */}
+          <div className="mt-10">
+            <FoodCarousel photos={foodPhotos} />
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -189,8 +162,7 @@ export default function Home() {
             <p className="mt-3 text-muted">Asegura tu pista con un anticipo. Confirmación inmediata.</p>
           </div>
           <ReserveButton href="/reservar/pista" size="lg" pulse>
-            Reservar pista{" "}
-            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            Reservar pista
           </ReserveButton>
         </div>
       </section>

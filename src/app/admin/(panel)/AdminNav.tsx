@@ -22,7 +22,7 @@ const ITEMS: NavItem[] = [
   { label: "Mapa de pistas", href: "/admin/pistas", available: true },
   { label: "Reservas", href: "/admin/reservas", available: true },
   { label: "Pagos", href: "/admin/pagos", available: true },
-  { label: "Reportes", href: "/admin/reportes", available: false, adminOnly: true },
+  { label: "Reportes", href: "/admin/reportes", available: true, adminOnly: true },
   { label: "Configuración", href: "/admin/configuracion", available: false, adminOnly: true },
   { label: "Usuarios", href: "/admin/usuarios", available: false, adminOnly: true },
 ];

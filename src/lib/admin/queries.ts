@@ -350,3 +350,51 @@ export async function getReservationById(id: string): Promise<AdminReservation |
   if (error) throw new Error(`getReservationById: ${error.message}`);
   return data ? map(data as Row) : null;
 }
+
+// ── Reportes ──────────────────────────────────────────────────────────────────
+
+export type ReportDay = {
+  date: string;
+  confirmadas: number;
+  canceladas: number;
+  ingresos: number; // suma de anticipos confirmados
+};
+
+export type ReportData = {
+  from: string;
+  to: string;
+  days: ReportDay[];
+  totalConfirmadas: number;
+  totalCanceladas: number;
+  totalIngresos: number;
+  detail: AdminReservation[];
+};
+
+export async function getReportData(from: string, to: string): Promise<ReportData> {
+  const detail = await listReservations({ from, to });
+
+  const byDay = new Map<string, ReportDay>();
+  for (const r of detail) {
+    const d =
+      byDay.get(r.date) ??
+      { date: r.date, confirmadas: 0, canceladas: 0, ingresos: 0 };
+    if (r.status === "confirmed") {
+      d.confirmadas += 1;
+      d.ingresos += r.amountDeposit;
+    } else if (r.status === "cancelled") {
+      d.canceladas += 1;
+    }
+    byDay.set(r.date, d);
+  }
+
+  const days = [...byDay.values()].sort((a, b) => a.date.localeCompare(b.date));
+  return {
+    from,
+    to,
+    days,
+    totalConfirmadas: days.reduce((s, d) => s + d.confirmadas, 0),
+    totalCanceladas: days.reduce((s, d) => s + d.canceladas, 0),
+    totalIngresos: days.reduce((s, d) => s + d.ingresos, 0),
+    detail,
+  };
+}

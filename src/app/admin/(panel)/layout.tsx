@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import { getAdminContext } from "@/lib/auth/admin";
 import LogoutButton from "@/app/admin/LogoutButton";
 import AdminNav from "@/app/admin/(panel)/AdminNav";
+import Notifier from "@/app/admin/(panel)/_Notifier";
 
 export default async function PanelLayout({
   children,
@@ -69,6 +70,7 @@ export default async function PanelLayout({
         </header>
         <main className="flex-1 p-5">{children}</main>
       </div>
+      <Notifier />
     </div>
   );
 }

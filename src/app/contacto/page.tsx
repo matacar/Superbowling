@@ -24,7 +24,7 @@ export default function ContactoPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
           Contacto
         </p>
-        <h1 className="font-display mt-3 text-4xl text-cream sm:text-6xl">Hablemos</h1>
+        <h1 className="font-display mt-3 text-5xl font-black text-cream sm:text-7xl">Hablemos</h1>
         <p className="mt-4 text-muted">
           ¿Una reserva, un evento o una duda? Estamos a un mensaje de distancia.
         </p>

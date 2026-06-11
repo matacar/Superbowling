@@ -14,10 +14,11 @@ export default function ReservarMesaPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
           Restaurante & bar
         </p>
-        <h1 className="font-display mt-3 text-4xl text-cream sm:text-5xl">Reserva tu mesa</h1>
+        <h1 className="font-display mt-3 text-5xl font-black text-cream sm:text-6xl">
+          Reserva tu <span className="text-shine">mesa</span>
+        </h1>
         <p className="mt-4 text-muted">
-          Cocina de Asia y parrilla, ahumados y coctelería de autor. Déjanos tu solicitud y
-          la confirmamos contigo. ¿Vienes a jugar?{" "}
+          Déjanos tu solicitud y la confirmamos contigo. ¿Vienes a jugar?{" "}
           <a href="/reservar/pista" className="text-accent hover:underline">
             Reserva una pista
           </a>

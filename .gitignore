@@ -32,3 +32,6 @@ next-env.d.ts
 
 # claude code (configuración local personal)
 .claude/settings.local.json
+
+# logs de desarrollo
+dev-server.log

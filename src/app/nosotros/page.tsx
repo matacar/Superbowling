@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/lib/site";
+import ReserveButton from "@/components/ui/ReserveButton";
+import ParallaxBackground from "@/components/ui/ParallaxBackground";
 
 export const metadata: Metadata = {
   title: "Sobre nosotros",
@@ -9,14 +11,14 @@ export const metadata: Metadata = {
     "Super Bowling Medellín: complejo de entretenimiento premium en Envigado con bolera, restaurante & bar, ahumados, hachas, billar y shows en vivo. Experiencias salvajes.",
 };
 
-const offerings: { emoji: string; title: string; desc: string }[] = [
-  { emoji: "🎳", title: "Bolera", desc: "16 pistas profesionales Brunswick con neón y zonas lounge." },
-  { emoji: "🍽️", title: "Restaurante & bar", desc: "Cocina de Asia y parrilla, sushi de autor y coctelería ritual." },
-  { emoji: "🔥", title: "Ahumados & parrilla", desc: "Cortes importados y ahumados de leña por horas." },
-  { emoji: "🪓", title: "Hachas", desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro." },
-  { emoji: "🎱", title: "Billares", desc: "Mesas para una partida tranquila o un torneo entre amigos." },
-  { emoji: "🎤", title: "Shows en vivo", desc: "Música, DJ y noches que se sienten." },
-  { emoji: "📺", title: "Pantalla gigante", desc: "La pantalla más grande de Medellín para vivir cada partido." },
+const offerings: { title: string; desc: string }[] = [
+  { title: "Bolera", desc: "16 pistas profesionales Brunswick con neón y zonas lounge." },
+  { title: "Restaurante & bar", desc: "Cocina de Asia y parrilla, sushi de autor y coctelería ritual." },
+  { title: "Ahumados & parrilla", desc: "Cortes importados y ahumados de leña por horas." },
+  { title: "Hachas", desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro." },
+  { title: "Billares", desc: "Mesas para una partida tranquila o un torneo entre amigos." },
+  { title: "Shows en vivo", desc: "Música, DJ y noches que se sienten." },
+  { title: "Pantalla gigante", desc: "La pantalla más grande de Medellín para vivir cada partido." },
 ];
 
 const gallery = [
@@ -33,27 +35,25 @@ export default function NosotrosPage() {
     <div className="pb-24 pt-28">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image src="/Lobby.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/50" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-            {site.slogan} 🦍
+        <ParallaxBackground src="/Lobby.jpg" alt="" priority />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/50" />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+            {site.slogan}
           </p>
-          <h1 className="font-display mt-3 max-w-3xl text-4xl text-cream sm:text-6xl">
-            Somos la tribu
+          <h1 className="font-display mt-3 max-w-3xl text-5xl font-black text-cream sm:text-7xl">
+            Somos la <span className="text-shine">tribu</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-muted">
-            Super Bowling Medellín no es solo una bolera: es un complejo de entretenimiento
-            premium donde la comida, los tragos y el juego se vuelven un ritual salvaje.
+            No es solo una bolera: es un complejo premium donde la comida, los tragos y el
+            juego se vuelven un ritual salvaje.
           </p>
         </div>
       </section>
 
       {/* Historia */}
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="font-display text-3xl text-cream sm:text-4xl">Nuestra historia</h2>
+        <h2 className="font-display text-3xl font-black text-cream sm:text-4xl">Nuestra historia</h2>
         <div className="mt-5 space-y-4 text-muted">
           <p>
             Abrimos nuestras puertas en <span className="text-cream">agosto de 2021</span>{" "}
@@ -85,7 +85,7 @@ export default function NosotrosPage() {
       {/* Qué ofrecemos */}
       <section className="border-t border-line bg-surface">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="font-display text-3xl text-cream sm:text-4xl">Qué ofrecemos</h2>
+          <h2 className="font-display text-3xl font-black text-cream sm:text-4xl">Qué ofrecemos</h2>
           <p className="mt-3 max-w-2xl text-muted">
             Un solo lugar, mil planes. Todo pensado para que no quieras irte.
           </p>
@@ -95,8 +95,8 @@ export default function NosotrosPage() {
                 key={o.title}
                 className="rounded-[var(--radius-brand)] border border-line bg-surface-2/60 p-5 transition-colors hover:border-accent/50"
               >
-                <div className="text-3xl">{o.emoji}</div>
-                <h3 className="mt-3 font-display text-lg text-cream">{o.title}</h3>
+                <span aria-hidden className="block h-0.5 w-8 bg-accent/60" />
+                <h3 className="mt-4 font-display text-lg font-black text-cream">{o.title}</h3>
                 <p className="mt-1.5 text-sm text-muted">{o.desc}</p>
               </div>
             ))}
@@ -106,7 +106,7 @@ export default function NosotrosPage() {
 
       {/* Instalaciones */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="font-display text-3xl text-cream sm:text-4xl">Nuestras instalaciones</h2>
+        <h2 className="font-display text-3xl font-black text-cream sm:text-4xl">Nuestras instalaciones</h2>
         <p className="mt-3 max-w-2xl text-muted">
           Espacios amplios y de diseño, hechos para vivirlos y para la foto.
         </p>
@@ -131,19 +131,14 @@ export default function NosotrosPage() {
       {/* CTA */}
       <section className="border-t border-line bg-ink">
         <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <h2 className="font-display text-3xl text-cream sm:text-4xl">
+          <h2 className="font-display text-4xl font-black text-cream sm:text-5xl">
             Ven a ser parte de la tribu
           </h2>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/reservar/pista"
-              className="rounded-[var(--radius-brand)] bg-accent px-7 py-3.5 text-center text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03]"
-            >
-              Reservar pista
-            </Link>
+            <ReserveButton href="/reservar/pista">Reservar pista</ReserveButton>
             <Link
               href="/eventos"
-              className="rounded-[var(--radius-brand)] border border-line px-7 py-3.5 text-center text-sm font-semibold text-cream transition-colors hover:border-accent"
+              className="inline-flex items-center justify-center rounded-[var(--radius-brand)] border border-line px-7 py-3.5 text-center text-sm font-semibold text-cream transition-colors hover:border-accent"
             >
               Cotizar un evento
             </Link>

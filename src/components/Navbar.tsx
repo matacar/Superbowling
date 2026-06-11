@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { navLinks, RESERVE_HREF, site } from "@/lib/site";
+import ReserveButton from "@/components/ui/ReserveButton";
 
 /**
  * Navegación principal fija.
@@ -66,12 +67,11 @@ export default function Navbar() {
 
         {/* CTA desktop + toggle móvil */}
         <div className="flex items-center gap-3">
-          <Link
-            href={RESERVE_HREF}
-            className="hidden rounded-[var(--radius-brand)] bg-accent px-5 py-2.5 text-sm font-semibold text-accent-ink transition-transform hover:scale-[1.03] active:scale-95 md:inline-flex"
-          >
-            Reservar
-          </Link>
+          <span className="hidden md:inline-flex">
+            <ReserveButton href={RESERVE_HREF} size="sm">
+              Reservar
+            </ReserveButton>
+          </span>
 
           <button
             type="button"

@@ -61,7 +61,6 @@ export default function MenuView() {
                   : "border-line bg-surface-2 text-muted hover:border-accent hover:text-cream"
               }`}
             >
-              {c.emoji && <span className="mr-1.5">{c.emoji}</span>}
               {c.name}
             </button>
           ))}
@@ -72,9 +71,9 @@ export default function MenuView() {
       <div className="mt-10 space-y-16">
         {menu.map((cat) => (
           <section key={cat.id} id={cat.id} className="scroll-mt-32">
-            <div className="flex items-end justify-between gap-4">
-              <h2 className="font-display text-3xl text-cream sm:text-4xl">
-                {cat.emoji && <span className="mr-2">{cat.emoji}</span>}
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 shrink-0 bg-accent/60" />
+              <h2 className="font-display text-3xl font-black text-cream sm:text-4xl">
                 {cat.name}
               </h2>
             </div>

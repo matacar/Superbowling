@@ -14,12 +14,11 @@ export default function ReservarPistaPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
           Reserva en línea
         </p>
-        <h1 className="font-display mt-3 text-4xl text-cream sm:text-5xl">
-          Reserva tu pista
+        <h1 className="font-display mt-3 text-5xl font-black text-cream sm:text-6xl">
+          Reserva tu <span className="text-shine">pista</span>
         </h1>
         <p className="mt-4 text-muted">
-          Elige día, hora, jugadores y pista. Aseguras tu turno con un anticipo y
-          recibes la confirmación al instante.
+          Día, hora, jugadores y pista. Aseguras tu turno con un anticipo y confirmas al instante.
         </p>
       </header>
 

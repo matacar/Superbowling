@@ -78,6 +78,102 @@ body {
   letter-spacing: 0.01em;
 }
 
+/* ──────────────────────────────────────────────────────────────
+   RENOVACIÓN DE DISEÑO (2026-06) — impacto + CTA vivo + parallax.
+   Todo aditivo: no altera páginas que no usen estas clases.
+   La base sigue siendo oro/champaña sobre negro; la audacia
+   (degradado vibrante) se concentra en UNA palabra y en el glow
+   del botón de reserva, nunca en bloques completos.
+   ────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Degradado vibrante de marca: oro → champaña con un destello
+     multicolor breve. Reservado para una palabra protagonista. */
+  --gradient-vibrant: linear-gradient(
+    100deg,
+    #e9d29a 0%,
+    #c9a24a 16%,
+    #ffd27a 32%,
+    #ff9ec7 44%,
+    #b98cff 52%,
+    #7ad7ff 60%,
+    #ffd27a 76%,
+    #c9a24a 100%
+  );
+}
+
+/* Palabra/destello con degradado vibrante recortado al texto.
+   Animación lenta de brillo; se detiene con prefers-reduced-motion. */
+.text-shine {
+  background: var(--gradient-vibrant);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shineShift 8s ease-in-out infinite;
+}
+@keyframes shineShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── CTA "Reservar" vivo: gradiente metálico, glow y glint que
+      sigue al cursor (posición vía --mx/--my que actualiza el JS). ── */
+.reserve-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-accent-2) 55%, var(--color-accent)),
+    var(--color-accent)
+  );
+  color: var(--color-accent-ink);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent-2) 60%, transparent),
+    0 8px 24px -10px color-mix(in srgb, var(--color-accent) 70%, transparent),
+    0 0 26px -8px color-mix(in srgb, var(--color-accent) 50%, transparent);
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+.reserve-btn:hover {
+  transform: translateY(-2px);
+  /* Glow dorado reforzado + tinte multicolor MUY sutil. */
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent-2) 85%, transparent),
+    0 14px 34px -10px color-mix(in srgb, var(--color-accent) 80%, transparent),
+    0 0 34px -6px color-mix(in srgb, var(--color-accent) 65%, transparent),
+    0 0 30px -4px rgba(255, 158, 199, 0.28),
+    0 0 44px -6px rgba(185, 140, 255, 0.22);
+}
+.reserve-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+/* Glint radial blanco que sigue el cursor (sheen dentro del botón). */
+.reserve-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    130px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, #ffffff 60%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.reserve-btn:hover::before {
+  opacity: 0.5;
+}
+
 /* Campos de formulario del asistente de reserva */
 .input {
   width: 100%;

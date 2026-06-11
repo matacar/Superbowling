@@ -2,12 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/lib/site";
 import { heroPhoto, logo, foodPhotos, galleryPhotos } from "@/lib/media";
+import ReserveButton from "@/components/ui/ReserveButton";
+import ParallaxBackground from "@/components/ui/ParallaxBackground";
+import StickyReserveBar from "@/components/ui/StickyReserveBar";
 
 /**
- * HOME — Fase 1 (marketing).
- * Reparte las fotos reales del lugar: la pista iluminada en el hero, la cocina
- * y el restaurante en su sección, y el resto de ambientes en la galería.
- * Las fotos y su ubicación se definen en src/lib/media.ts (no hardcodeadas aquí).
+ * HOME — renovación de diseño (2026-06).
+ * Cada sección empuja a RESERVAR: copy corto, CTA "Reservar pista" siempre
+ * protagonista, fondo con parallax y una sola palabra del hero con degradado
+ * vibrante. Las fotos y su ubicación viven en src/lib/media.ts.
  */
 export default function Home() {
   const [foodHero, ...dishes] = foodPhotos;
@@ -16,61 +19,47 @@ export default function Home() {
     <>
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        {/* Foto de fondo: las 16 pistas iluminadas */}
-        <Image
-          src={heroPhoto.src}
-          alt={heroPhoto.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        {/* Capas de oscurecido + brillo dorado de marca (legibilidad del texto) */}
+        {/* Fondo: las 16 pistas iluminadas, con parallax sutil. */}
+        <ParallaxBackground src={heroPhoto.src} alt={heroPhoto.alt} priority />
+        {/* Capas de oscurecido + brillo dorado (legibilidad del texto). */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
         <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_70%_0%,rgba(201,162,74,0.20),transparent_55%)]" />
 
         <div className="relative mx-auto w-full max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
-          {/* Logo real de marca. mix-blend-screen elimina el fondo negro del JPG
-              y deja flotar solo las letras doradas sobre la foto. */}
+          {/* Logo real de marca (mix-blend-screen quita el fondo negro del JPG). */}
           <Image
             src={logo.src}
             alt={logo.alt}
             width={560}
             height={206}
             priority
-            className="h-auto w-[280px] max-w-full mix-blend-screen sm:w-[420px] lg:w-[480px]"
+            className="h-auto w-[240px] max-w-full mix-blend-screen sm:w-[360px] lg:w-[420px]"
           />
 
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
             {site.slogan}
           </p>
-          <h1 className="font-display mt-3 max-w-3xl text-4xl leading-[1.05] text-cream sm:text-6xl">
-            El lugar premium de <span className="text-accent">bolos</span> y comida
-            de Medellín
+          <h1 className="font-display mt-3 max-w-3xl text-5xl font-black leading-[0.95] text-cream sm:text-7xl">
+            Tu <span className="text-shine">pista</span> te está esperando
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted">
-            {site.lanes} pistas profesionales Brunswick, cocina de Asia y parrilla,
-            bar de cócteles y eventos inolvidables. Reserva tu pista en línea en
-            segundos.
+          <p className="mt-5 max-w-md text-lg text-muted">
+            16 pistas Brunswick, cocina y coctelería. Resérvala en segundos.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/reservar/pista"
-              className="rounded-[var(--radius-brand)] bg-accent px-7 py-3.5 text-center text-base font-semibold text-accent-ink transition-transform hover:scale-[1.03] active:scale-95"
-            >
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ReserveButton href="/reservar/pista" size="lg">
               Reservar pista
-            </Link>
+            </ReserveButton>
             <Link
               href="/reservar/mesa"
-              className="rounded-[var(--radius-brand)] border border-line bg-surface/60 px-7 py-3.5 text-center text-base font-semibold text-cream backdrop-blur transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex items-center justify-center rounded-[var(--radius-brand)] border border-line bg-surface/60 px-8 py-4 text-center text-base font-semibold text-cream backdrop-blur transition-colors hover:border-accent hover:text-accent"
             >
               Reservar mesa
             </Link>
           </div>
 
-          {/* Stats */}
-          <dl className="mt-16 grid max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4">
+          {/* Datos clave en tira compacta (menos texto, más impacto). */}
+          <dl className="mt-14 flex max-w-2xl flex-wrap gap-x-10 gap-y-5">
             {[
               { k: `${site.lanes}`, v: "Pistas Brunswick" },
               { k: `${site.maxPlayersPerLane}`, v: "Jugadores por pista" },
@@ -78,10 +67,8 @@ export default function Home() {
               { k: "Eventos", v: "Privados & corporativos" },
             ].map((s) => (
               <div key={s.v}>
-                <dt className="font-display text-4xl text-cream">{s.k}</dt>
-                <dd className="mt-1 text-xs uppercase tracking-wide text-muted">
-                  {s.v}
-                </dd>
+                <dt className="font-display text-3xl text-cream sm:text-4xl">{s.k}</dt>
+                <dd className="mt-1 text-xs uppercase tracking-wide text-muted">{s.v}</dd>
               </div>
             ))}
           </dl>
@@ -92,15 +79,16 @@ export default function Home() {
       <section className="border-t border-line bg-ink">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <header className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-              Cocina & restaurante
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+              Cocina & bar
             </p>
-            <h2 className="font-display mt-3 text-3xl text-cream sm:text-5xl">
-              No solo se juega: se come increíble
+            <h2 className="font-display mt-3 text-4xl font-black text-cream sm:text-6xl">
+              No solo se juega.
+              <br />
+              <span className="text-accent">Se come increíble.</span>
             </h2>
-            <p className="mt-4 text-muted">
-              Cocina de Asia, parrilla y bar de cócteles para acompañar cada
-              chuza. Ideal para una cita, un plan con amigos o cerrar un negocio.
+            <p className="mt-4 max-w-md text-muted">
+              Cocina de Asia, parrilla y coctelería de autor para cada chuza.
             </p>
           </header>
 
@@ -134,10 +122,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ReserveButton href="/reservar/pista">Reservar pista</ReserveButton>
             <Link
               href="/carta"
-              className="inline-flex rounded-[var(--radius-brand)] border border-line px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex items-center justify-center rounded-[var(--radius-brand)] border border-line px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-accent hover:text-accent"
             >
               Ver la carta
             </Link>
@@ -149,16 +138,12 @@ export default function Home() {
       <section className="border-t border-line bg-surface">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <header className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
               El lugar
             </p>
-            <h2 className="font-display mt-3 text-3xl text-cream sm:text-5xl">
-              Un espacio para vivirlo
+            <h2 className="font-display mt-3 text-4xl font-black text-cream sm:text-6xl">
+              Hecho para vivirlo
             </h2>
-            <p className="mt-4 text-muted">
-              Pistas de neón, zonas lounge, billar, salas para eventos y rincones
-              hechos para la foto.
-            </p>
           </header>
 
           {/* Masonry por columnas: respeta proporciones variadas de cada foto. */}
@@ -184,23 +169,21 @@ export default function Home() {
 
       {/* ── CTA FINAL ────────────────────────────────────────────────── */}
       <section className="border-t border-line bg-ink">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <h2 className="font-display text-3xl text-cream sm:text-4xl">
-              ¿Listo para tu próxima chuza?
+            <h2 className="font-display text-4xl font-black text-cream sm:text-5xl">
+              ¿Listo para tu próxima <span className="text-shine">chuza</span>?
             </h2>
-            <p className="mt-2 text-muted">
-              Asegura tu pista con un anticipo. Confirmación inmediata.
-            </p>
+            <p className="mt-3 text-muted">Asegura tu pista con un anticipo. Confirmación inmediata.</p>
           </div>
-          <Link
-            href="/reservar/pista"
-            className="rounded-[var(--radius-brand)] bg-accent px-8 py-4 text-base font-semibold text-accent-ink transition-transform hover:scale-[1.03] active:scale-95"
-          >
+          <ReserveButton href="/reservar/pista" size="lg">
             Reservar pista
-          </Link>
+          </ReserveButton>
         </div>
       </section>
+
+      {/* Barra de reserva fija (escritorio) que aparece tras el hero. */}
+      <StickyReserveBar />
     </>
   );
 }

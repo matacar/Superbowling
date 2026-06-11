@@ -7,7 +7,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getReservationById, timeRangeFor } from "@/lib/admin/queries";
 import { getSettings, formatCOP } from "@/lib/reservations/settings";
+import { getAdminContext, type AdminRole } from "@/lib/auth/admin";
 import { OP_CHIP, OP_LABEL, STATUS_CHIP, STATUS_LABEL } from "@/lib/admin/labels";
+import ReservaActions from "./_Actions";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +32,8 @@ export default async function ReservaDetallePage({
 
   const s = getSettings();
   const durationMin = r.turns * s.turn.durationMinutes;
+  const auth = await getAdminContext();
+  const role: AdminRole = auth.status === "ok" ? auth.ctx.role : "recepcion";
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
@@ -88,6 +92,15 @@ export default async function ReservaDetallePage({
           />
         </Section>
       </div>
+
+      <ReservaActions
+        id={r.id}
+        status={r.status}
+        opStatus={r.opStatus}
+        players={r.players}
+        customer={r.customer}
+        role={role}
+      />
     </div>
   );
 }

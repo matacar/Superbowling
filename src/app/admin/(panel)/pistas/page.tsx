@@ -5,11 +5,12 @@
  */
 
 import Link from "next/link";
-import { getLaneMap, currentSlotIndex } from "@/lib/admin/queries";
+import { getLaneMap, listBlocks, currentSlotIndex, slotLabelFor, timeRangeFor } from "@/lib/admin/queries";
 import { getSettings } from "@/lib/reservations/settings";
 import { bookableDates, generateSlots, nowInBogota } from "@/lib/reservations/time";
 import { LANE_CELL, LANE_LABEL } from "@/lib/admin/labels";
 import Controls from "./_Controls";
+import BlockControls from "./_BlockControls";
 import RealtimeRefresher from "@/app/admin/(panel)/_RealtimeRefresher";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +38,8 @@ export default async function PistasPage({
   turns = Math.min(turns, s.turn.maxTurns);
 
   const cells = slots.length > 0 ? await getLaneMap(date, startSlot, turns) : [];
+  const dayBlocks = await listBlocks(date);
+  const freeLanes = cells.filter((c) => c.status === "free").map((c) => c.laneId);
 
   const dateOptions = dates.map((d) => ({
     value: d.ymd,
@@ -120,6 +123,22 @@ export default async function PistasPage({
             );
           })}
         </div>
+      )}
+
+      {slots.length > 0 && (
+        <BlockControls
+          date={date}
+          startSlot={startSlot}
+          turns={turns}
+          slotLabel={slotLabelFor(date, startSlot)}
+          freeLanes={freeLanes}
+          blocks={dayBlocks.map((b) => ({
+            id: b.id,
+            laneId: b.laneId,
+            range: timeRangeFor(b.date, b.startSlot, b.turns),
+            reason: b.reason,
+          }))}
+        />
       )}
     </div>
   );

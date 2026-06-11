@@ -73,7 +73,15 @@ export default async function ReservasPage({
           <h1 className="font-display text-2xl tracking-wide text-cream">Reservas</h1>
           <p className="text-sm text-muted">{reservas.length} resultado(s)</p>
         </div>
-        <RealtimeRefresher tables={["reservations"]} />
+        <div className="flex items-center gap-3">
+          <RealtimeRefresher tables={["reservations"]} />
+          <Link
+            href="/admin/reservas/nueva"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:bg-accent-2"
+          >
+            + Nueva reserva
+          </Link>
+        </div>
       </div>
 
       <Filters

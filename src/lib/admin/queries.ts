@@ -305,6 +305,42 @@ export async function listReservations(
   return (data as Row[]).map(map);
 }
 
+export type AdminBlock = {
+  id: string;
+  laneId: number;
+  date: string;
+  startSlot: number;
+  turns: number;
+  reason: string | null;
+};
+
+/** Bloqueos (mantenimiento/evento) de un día. */
+export async function listBlocks(date: string): Promise<AdminBlock[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("blocks")
+    .select("id, lane_id, block_date, start_slot, turns, reason")
+    .eq("block_date", date)
+    .order("lane_id", { ascending: true });
+  if (error) throw new Error(`listBlocks: ${error.message}`);
+  return (
+    (data ?? []) as {
+      id: string;
+      lane_id: number;
+      block_date: string;
+      start_slot: number;
+      turns: number;
+      reason: string | null;
+    }[]
+  ).map((b) => ({
+    id: b.id,
+    laneId: b.lane_id,
+    date: b.block_date,
+    startSlot: b.start_slot,
+    turns: b.turns,
+    reason: b.reason,
+  }));
+}
+
 export async function getReservationById(id: string): Promise<AdminReservation | null> {
   const { data, error } = await supabaseAdmin()
     .from("reservations")

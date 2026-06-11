@@ -26,7 +26,7 @@ export const logo = p("Logo.jpg", "Logo de Super Bowling Medellín");
 
 /** HERO — la foto horizontal más impactante. */
 export const heroPhoto = p(
-  "Pistas.jpg",
+  "Foto_pistas.jpg",
   "Las 16 pistas de bolos de Super Bowling Medellín bajo luces de neón",
 );
 
@@ -41,7 +41,7 @@ export const foodPhotos: Photo[] = [
 
 /** GALERÍA — el resto de los ambientes del lugar. */
 export const galleryPhotos: Photo[] = [
-  p("Foto_pistas.jpg", "Pistas de bolos profesionales Brunswick"),
+  p("Pistas.jpg", "Las 16 pistas de bolos bajo luces de neón"),
   p("Luces.jpg", "Sala de espejos con neón dorado y sillas tipo trono"),
   p("Bolos.jpg", "Bolos y bola lista para jugar"),
   p("Pistas_sofa.jpg", "Pistas con zona de sofás lounge"),

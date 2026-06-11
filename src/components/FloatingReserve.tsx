@@ -12,6 +12,7 @@ export default function FloatingReserve() {
       <ReserveButton
         href={RESERVE_HREF}
         size="md"
+        pulse
         className="w-full rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)]"
       >
         Reservar pista

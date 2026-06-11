@@ -4,9 +4,7 @@
  * Las franjas seleccionables (cada 30 min) se derivan de aquí, NO se
  * hardcodean en el formulario. Editar este objeto cambia las franjas.
  *
- * [POR CONFIRMAR] Horario propio del restaurante. Base provisional = horario
- * del lugar (la bolera). El restaurante podría abrir antes (almuerzo) o cerrar
- * la cocina antes; ajustar cuando el cliente confirme el horario exacto.
+ * Horario confirmado por el cliente (2026-06-11). Domingo pendiente.
  */
 
 import { type DayKey, dayKeyFromDate } from "@/lib/reservations/settings";
@@ -15,12 +13,12 @@ import { type DayKey, dayKeyFromDate } from "@/lib/reservations/settings";
 export type OpenHours = { open: string; close: string } | null;
 
 export const RESTAURANT_HOURS: Record<DayKey, OpenHours> = {
-  mon: { open: "15:00", close: "23:59" }, // [POR CONFIRMAR]
-  tue: { open: "15:00", close: "23:59" }, // [POR CONFIRMAR]
-  wed: { open: "15:00", close: "23:59" }, // [POR CONFIRMAR]
-  thu: { open: "15:00", close: "23:59" }, // [POR CONFIRMAR]
-  fri: { open: "15:00", close: "23:59" }, // [POR CONFIRMAR]
-  sat: { open: "12:00", close: "24:00" }, // [POR CONFIRMAR]
+  mon: { open: "15:00", close: "22:00" }, // Lun–Mié 3:00 p. m. – 10:00 p. m.
+  tue: { open: "15:00", close: "22:00" },
+  wed: { open: "15:00", close: "22:00" },
+  thu: { open: "15:00", close: "24:00" }, // Jue–Vie 3:00 p. m. – 12:00 a. m.
+  fri: { open: "15:00", close: "24:00" },
+  sat: { open: "12:00", close: "24:00" }, // Sáb 12:00 m. – 12:00 a. m.
   sun: null, // [POR CONFIRMAR — domingo pendiente]
 };
 

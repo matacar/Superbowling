@@ -36,19 +36,31 @@ export default function Home() {
             className="h-auto w-[240px] max-w-full mix-blend-screen sm:w-[360px] lg:w-[420px]"
           />
 
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+          <p className="mt-6 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.3em] text-accent-2">
+            <span
+              aria-hidden
+              className="h-2 w-2 rounded-full"
+              style={{ background: "var(--gradient-vibrant)" }}
+            />
             {site.slogan}
           </p>
-          <h1 className="font-display mt-3 max-w-3xl text-5xl font-black leading-[0.95] text-cream sm:text-7xl">
-            Tu <span className="text-shine">pista</span> te está esperando
+          <h1 className="font-display mt-4 max-w-3xl text-6xl font-black leading-[0.9] text-cream sm:text-8xl">
+            Tu{" "}
+            <span className="text-shine drop-shadow-[0_2px_28px_rgba(201,162,74,0.45)]">
+              pista
+            </span>
+            <br />
+            te espera
           </h1>
           <p className="mt-5 max-w-md text-lg text-muted">
-            16 pistas Brunswick, cocina y coctelería. Resérvala en segundos.
+            16 pistas, cocina y coctelería.{" "}
+            <span className="font-semibold text-accent-2">Resérvala en segundos.</span>
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ReserveButton href="/reservar/pista" size="lg">
-              Reservar pista
+            <ReserveButton href="/reservar/pista" size="lg" pulse>
+              Reservar pista{" "}
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </ReserveButton>
             <Link
               href="/reservar/mesa"
@@ -61,7 +73,7 @@ export default function Home() {
           {/* Datos clave en tira compacta (menos texto, más impacto). */}
           <dl className="mt-14 flex max-w-2xl flex-wrap gap-x-10 gap-y-5">
             {[
-              { k: `${site.lanes}`, v: "Pistas Brunswick" },
+              { k: `${site.lanes}`, v: "Pistas profesionales" },
               { k: `${site.maxPlayersPerLane}`, v: "Jugadores por pista" },
               { k: "Asia", v: "Cocina & parrilla" },
               { k: "Eventos", v: "Privados & corporativos" },
@@ -176,8 +188,9 @@ export default function Home() {
             </h2>
             <p className="mt-3 text-muted">Asegura tu pista con un anticipo. Confirmación inmediata.</p>
           </div>
-          <ReserveButton href="/reservar/pista" size="lg">
-            Reservar pista
+          <ReserveButton href="/reservar/pista" size="lg" pulse>
+            Reservar pista{" "}
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </ReserveButton>
         </div>
       </section>

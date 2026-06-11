@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const offerings: { title: string; desc: string }[] = [
-  { title: "Bolera", desc: "16 pistas profesionales Brunswick con neón y zonas lounge." },
+  { title: "Bolera", desc: "16 pistas profesionales con neón y zonas lounge." },
   { title: "Restaurante & bar", desc: "Cocina de Asia y parrilla, sushi de autor y coctelería ritual." },
   { title: "Ahumados & parrilla", desc: "Cortes importados y ahumados de leña por horas." },
   { title: "Hachas", desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro." },
@@ -58,9 +58,9 @@ export default function NosotrosPage() {
           <p>
             Abrimos nuestras puertas en <span className="text-cream">agosto de 2021</span>{" "}
             en San Jorge, Envigado, con una idea clara: llevar la diversión a otro nivel.
-            Tomamos lo mejor de una bolera de talla mundial —16 pistas profesionales
-            Brunswick— y lo mezclamos con alta cocina, ahumados de leña y coctelería de
-            autor para crear algo nuevo en la ciudad.
+            Tomamos lo mejor de una bolera de talla mundial —16 pistas profesionales—
+            y lo mezclamos con alta cocina, ahumados de leña y coctelería de autor para
+            crear algo nuevo en la ciudad.
           </p>
           <p>
             Hacemos parte de <span className="text-cream">{site.group}</span>, con presencia

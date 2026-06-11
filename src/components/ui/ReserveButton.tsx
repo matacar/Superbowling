@@ -23,11 +23,14 @@ export default function ReserveButton({
   children,
   className = "",
   size = "md",
+  pulse = false,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
   size?: Size;
+  /** Pulso de brillo continuo para el CTA protagonista (p. ej. el hero). */
+  pulse?: boolean;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const raf = useRef<number | null>(null);
@@ -50,7 +53,9 @@ export default function ReserveButton({
       ref={ref}
       href={href}
       onMouseMove={onMove}
-      className={`reserve-btn inline-flex items-center justify-center gap-2 rounded-[var(--radius-brand)] font-semibold ${SIZES[size]} ${className}`}
+      className={`reserve-btn group inline-flex items-center justify-center gap-2 rounded-[var(--radius-brand)] font-semibold ${
+        pulse ? "reserve-btn--pulse" : ""
+      } ${SIZES[size]} ${className}`}
     >
       {children}
     </Link>

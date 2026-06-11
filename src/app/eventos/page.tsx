@@ -35,7 +35,7 @@ const experiences: Experience[] = [
   },
   {
     title: "Bolera",
-    desc: "16 pistas Brunswick con neón y zonas lounge. El corazón salvaje del lugar.",
+    desc: "16 pistas profesionales con neón y zonas lounge. El corazón salvaje del lugar.",
     image: "/Pistas_sofa.jpg",
     cta: { label: "Reservar pista", href: "/reservar/pista" },
   },

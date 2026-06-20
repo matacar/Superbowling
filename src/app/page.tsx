@@ -73,7 +73,7 @@ export default function Home() {
             {[
               { k: `${site.lanes}`, v: "Pistas profesionales" },
               { k: `${site.maxPlayersPerLane}`, v: "Jugadores por pista" },
-              { k: "Asia", v: "Cocina & parrilla" },
+              { k: "Leña", v: "Parrilla & ahumados" },
               { k: "Eventos", v: "Privados & corporativos" },
             ].map((s) => (
               <div key={s.v}>
@@ -98,7 +98,7 @@ export default function Home() {
               <span className="text-accent">Se come increíble.</span>
             </h2>
             <p className="mt-4 max-w-md text-muted">
-              Cocina de Asia, parrilla y coctelería de autor para cada chuza.
+              Parrilla y ahumados a la leña, sushi de autor, pizzas y coctelería para cada chuza.
             </p>
           </header>
 
@@ -108,7 +108,8 @@ export default function Home() {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ReserveButton href="/reservar/pista">Reservar pista</ReserveButton>
+            {/* Sección de comida: el CTA correcto es reservar mesa. */}
+            <ReserveButton href="/reservar/mesa">Reservar mesa</ReserveButton>
             <Link
               href="/carta"
               className="inline-flex items-center justify-center rounded-[var(--radius-brand)] border border-line px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-accent hover:text-accent"

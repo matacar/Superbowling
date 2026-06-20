@@ -1,11 +1,17 @@
 /**
  * CARTA — Super Bowling Medellín
  * ───────────────────────────────
- * Contenido extraído de la carta oficial en PDF (copia local en
+ * Contenido transcrito de la carta oficial en PDF (copia local en
  * public/assets/carta-super-bowling.pdf). Fuente única de verdad del menú:
  * editar aquí actualiza la página /carta. Precios en COP.
  *
- * Nota: algunos nombres conservan la grafía original de la carta.
+ * Identidad: cocina a la LEÑA — parrilla, ahumados y cortes — más sushi de
+ * autor, pizzas artesanales y una coctelería amplia. El orden de categorías
+ * lidera con la parrilla; lo asiático (sushi, okonomiyaki) es una parte, no el
+ * centro. Sin emojis: jerarquía limpia en estética negro/oro.
+ *
+ * Nota: algunos nombres conservan la grafía original de la carta (p. ej.
+ * "Tribv", "Cheese Burguer").
  */
 
 export type MenuItem = {
@@ -27,7 +33,6 @@ export type MenuGroup = {
 export type MenuCategory = {
   id: string;
   name: string;
-  emoji?: string;
   note?: string;
   /** Imagen de banner opcional (ruta en /public). */
   image?: string;
@@ -35,12 +40,12 @@ export type MenuCategory = {
 };
 
 export const menu: MenuCategory[] = [
+  // ── 1. PARRILLA & CORTES (identidad de la casa) ──
   {
     id: "parrilla",
     name: "Parrilla & Cortes",
-    emoji: "🔥",
     image: "/Comida.jpg",
-    note: "Ritual Fuego · Ritual Niebla · Ritual Ahumado.",
+    note: "Cocina a la leña. Rituales de la casa: Fuego, Niebla y Ahumado.",
     groups: [
       {
         name: "Cortes Importados",
@@ -66,7 +71,7 @@ export const menu: MenuCategory[] = [
             desc: "Medio pollo de campo marinado con especias seleccionadas y cerveza artesanal durante 72 horas, ahumado por 8 horas en leña natural, acompañado de salsa de cilantro, limones parrillados y papa casco.",
           },
           {
-            name: "Hamburguesa Piel Roja 🔥",
+            name: "Hamburguesa Piel Roja",
             price: "$85.000",
             desc: "Pan pretzel, doble carne (300gr) a término en leña, tocineta ahumada, pepinillos agridulces, vegetales frescos, salsa de chiles dulces, chimichurri y queso mozzarella, acompañada de papas casco.",
           },
@@ -84,10 +89,11 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+
+  // ── 2. ENTRADAS & PARA COMPARTIR ──
   {
     id: "entradas",
-    name: "Entradas & Compartir",
-    emoji: "🍢",
+    name: "Entradas & Para Compartir",
     groups: [
       {
         name: "Entradas Mar",
@@ -103,7 +109,7 @@ export const menu: MenuCategory[] = [
             desc: "3 rodajas de aguacate apanadas con tope de ceviche cremoso de camarón y remolacha caramelizada con salsa teriyaki.",
           },
           {
-            name: "Ceviche Tribv 🔥",
+            name: "Ceviche Tribv",
             price: "$69.000",
             desc: "Ceviche de pescado blanco en salsa cremosa con papa criolla, aguacate y maíz tostado con un toque de aceite de ajonjolí, acompañado de chips de plátano y yuca crocante.",
           },
@@ -146,42 +152,136 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+
+  // ── 3. FUERTES (pastas, salmón, costillas, hamburguesas, ensaladas) ──
   {
-    id: "okonomiyaki",
-    name: "Okonomiyaki",
-    emoji: "🍙",
-    note: "También conocida como la pizza japonesa: una tortilla a base de arroz frito de sushi, hoja de arroz y nuestros ingredientes Tribv.",
+    id: "fuertes",
+    name: "Fuertes",
+    image: "/Comidas-3.jpg",
     groups: [
       {
         items: [
           {
-            name: "Acevichada",
-            price: "$54.000",
-            desc: "Ceviche de camarón al estilo tribv, aguacate, queso crema, puerro caramelizado, mix de ajonjolí tostado y flor comestible.",
+            name: "Solomito al Tequila",
+            price: "$200.000",
+            desc: "500gr. Solomito madurado 72 horas y ahumado con madera de roble, finalizado en mantequilla especiada y flambeado con tequila en mesa, con pan baguette, papa casco y ensalada.",
           },
           {
-            name: "Dinamita",
+            name: "Nido Salvaje de Solomito Stroganoff",
             price: "$67.000",
-            desc: "Salsa dinamita, aguacate, queso crema y exclusivos ingredientes japoneses (palmito shirakiku, wakame, caviar de cangrejo, mayonesa japonesa, salsa ryu, salsa teriyaki y flor comestible).",
+            desc: "Base de masa madre reposada 72 horas, rellena de solomito en salsa stroganoff, cubierta con queso doble crema gratinado.",
           },
           {
-            name: "Salmón Ahumado",
-            price: "$63.000",
-            desc: "Salmón ahumado, queso crema, aguacate, wakame, palmito de cangrejo marinado en aceite de ajonjolí y salsas de la casa.",
+            name: "Salmón al estilo Cajún",
+            price: "$94.000",
+            desc: "Salmón envuelto en especias seleccionadas, mantequilla y romero a la parrilla, con vegetales al vapor y al vino tinto.",
           },
           {
-            name: "Octopus",
-            price: "$54.000",
-            desc: "Mezcla de sabores de mar (pulpo, cangrejo), salsa ryu, queso crema, aguacate, quinoa crocante, salsa teriyaki y flor comestible.",
+            name: "Fettuccine y Solomito",
+            price: "$86.000",
+            desc: "Fettuccine al dente, solomito a la parrilla, portobello, tomates confitados, parmesano y queso grana padano en salsa blanca.",
+          },
+          {
+            name: "Fettuccine y Pollo en Finas Hierbas",
+            price: "$70.000",
+            desc: "Fettuccine al dente, pollo en finas hierbas a la parrilla, tocineta ahumada, champiñones en salsa de pimentones y tomatillos tatemados, parmesano y albahaca.",
+          },
+          {
+            name: "Hamburguesa Tribv",
+            price: "$61.000",
+            desc: "Pan brioche, 150gr de carne angus a término, mermelada de tocino, salsa de queso cheddar, rúgula, vegetales frescos, salsa ryu y papas.",
+          },
+          {
+            name: "Costilla BBQ Chamoy",
+            price: "$88.000",
+            desc: "Costillas de cerdo marinadas y bañadas en salsa BBQ chamoy de la casa, con papas criollas al romero y limón, ensalada fresca con vinagreta de cilantro y brotes de rábano.",
+          },
+          {
+            name: "Chicharrón de Jabalí",
+            price: "$84.000",
+            desc: "Tocino en cocción lenta 7 horas y horneado: crocante por fuera, suave por dentro, con guacamole rústico, cebolla encurtida, supremas de naranja y brotes de rábano.",
+          },
+        ],
+      },
+      {
+        name: "Ensaladas",
+        items: [
+          {
+            name: "Ensalada de Pollo y Camarón",
+            price: "$61.000",
+            desc: "Salteado de pollo y camarón, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, queso mozzarella, aguacate, vinagreta de cilantro y mix de ajonjolí.",
+          },
+          {
+            name: "Ensalada de Salmón Teriyaki",
+            price: "$96.000",
+            desc: "Salmón sellado en salsa teriyaki, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, aguacate, mix de ajonjolí, puerro caramelizado y vinagreta de cilantro.",
+          },
+          {
+            name: "Ensalada de Pollo Agridulce",
+            price: "$52.000",
+            desc: "Salteado de pollo en salsa agridulce, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, aguacate, parmesano, vinagreta de cilantro y mix de ajonjolí.",
+          },
+        ],
+      },
+      {
+        name: "Adiciones",
+        items: [
+          { name: "Papas al limón y romero", price: "$16.000" },
+          { name: "Papas casco", price: "$16.000" },
+          { name: "Patacones con hogao y guacamole", price: "$16.000" },
+          { name: "Ensalada fresca", price: "$16.000" },
+        ],
+      },
+    ],
+  },
+
+  // ── 4. PIZZAS (masa artesanal) ──
+  {
+    id: "pizzas",
+    name: "Pizzas",
+    note: "Masa artesanal tipo italiana, 72 horas de maduración, salsa pomodoro de la casa y especias. Se pueden terminar en la mesa con ajo en polvo, orégano y aceite de oliva (opcional).",
+    groups: [
+      {
+        items: [
+          {
+            name: "Pizza Vegetariana",
+            price: "$58.000",
+            desc: "Champiñones, tomates cherry, almendras garapiñadas, reducción de vino tinto, mizclum, queso parmesano y mozzarella.",
+          },
+          {
+            name: "Pizza Pulled Pork",
+            price: "$61.000",
+            desc: "Pulled pork en BBQ de chamoy de la casa, mermelada de tocino, rúgula y queso mozzarella.",
+          },
+          {
+            name: "Pizza Chicharrón",
+            price: "$61.000",
+            desc: "Chicharrón caramelizado, cilantro, queso parmesano rallado y queso mozzarella.",
+          },
+          {
+            name: "Pizza Pollo Trufado",
+            price: "$61.000",
+            desc: "Salsa pomodoro, tomates frescos y hierbas aromáticas, salteado de pollo trufado, tocineta ahumada, variedad de setas y parmesano rallado.",
+          },
+          {
+            name: "Pizza Mediterránea",
+            price: "$100.000",
+            desc: "Base pesto y mozzarella, chorizo español y pepperoni, jamón serrano y queso paipa, con borde relleno de queso (mozzarella y queso crema).",
+          },
+          {
+            name: "Adición de Borde de Queso",
+            price: "$19.000",
+            desc: "Queso crema, queso mozzarella.",
           },
         ],
       },
     ],
   },
+
+  // ── 5. SUSHI ROLLS (sushi de autor) ──
   {
     id: "sushi",
     name: "Sushi Rolls",
-    emoji: "🍣",
     image: "/Comidas-2.jpg",
     note: "Precios por porción de 5 bocados / 10 bocados.",
     groups: [
@@ -282,133 +382,44 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+
+  // ── 6. OKONOMIYAKI ──
   {
-    id: "fuertes",
-    name: "Fuertes",
-    emoji: "🍖",
-    image: "/Comidas-3.jpg",
+    id: "okonomiyaki",
+    name: "Okonomiyaki",
+    note: "También conocida como la pizza japonesa: una tortilla a base de arroz frito de sushi, hoja de arroz y nuestros ingredientes Tribv.",
     groups: [
       {
         items: [
           {
-            name: "Solomito al Tequila",
-            price: "$200.000",
-            desc: "500gr. Solomito madurado 72 horas y ahumado con madera de roble, finalizado en mantequilla especiada y flambeado con tequila en mesa, con pan baguette, papa casco y ensalada.",
+            name: "Acevichada",
+            price: "$54.000",
+            desc: "Ceviche de camarón al estilo tribv, aguacate, queso crema, puerro caramelizado, mix de ajonjolí tostado y flor comestible.",
           },
           {
-            name: "Nido Salvaje de Solomito Stroganoff",
+            name: "Dinamita",
             price: "$67.000",
-            desc: "Base de masa madre reposada 72 horas, rellena de solomito en salsa stroganoff, cubierta con queso doble crema gratinado.",
+            desc: "Salsa dinamita, aguacate, queso crema y exclusivos ingredientes japoneses (palmito shirakiku, wakame, caviar de cangrejo, mayonesa japonesa, salsa ryu, salsa teriyaki y flor comestible).",
           },
           {
-            name: "Salmón al estilo Cajún",
-            price: "$94.000",
-            desc: "Salmón envuelto en especias seleccionadas, mantequilla y romero a la parrilla, con vegetales al vapor y al vino tinto.",
+            name: "Salmón Ahumado",
+            price: "$63.000",
+            desc: "Salmón ahumado, queso crema, aguacate, wakame, palmito de cangrejo marinado en aceite de ajonjolí y salsas de la casa.",
           },
           {
-            name: "Fettuccine y Solomito",
-            price: "$86.000",
-            desc: "Fettuccine al dente, solomito a la parrilla, portobello, tomates confitados, parmesano y queso grana padano en salsa blanca.",
-          },
-          {
-            name: "Fettuccine y Pollo en Finas Hierbas",
-            price: "$70.000",
-            desc: "Fettuccine al dente, pollo en finas hierbas a la parrilla, tocineta ahumada, champiñones en salsa de pimentones y tomatillos tatemados, parmesano y albahaca.",
-          },
-          {
-            name: "Hamburguesa Tribv",
-            price: "$61.000",
-            desc: "Pan brioche, 150gr de carne angus a término, mermelada de tocino, salsa de queso cheddar, rúgula, vegetales frescos, salsa ryu y papas.",
-          },
-          {
-            name: "Costilla BBQ Chamoy",
-            price: "$88.000",
-            desc: "Costillas de cerdo marinadas y bañadas en salsa BBQ chamoy de la casa, con papas criollas al romero y limón, ensalada fresca con vinagreta de cilantro y brotes de rábano.",
-          },
-          {
-            name: "Chicharrón de Jabalí",
-            price: "$84.000",
-            desc: "Tocino en cocción lenta 7 horas y horneado: crocante por fuera, suave por dentro, con guacamole rústico, cebolla encurtida, supremas de naranja y brotes de rábano.",
-          },
-        ],
-      },
-      {
-        name: "Ensaladas",
-        items: [
-          {
-            name: "Ensalada de Pollo y Camarón",
-            price: "$61.000",
-            desc: "Salteado de pollo y camarón, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, queso mozzarella, aguacate, vinagreta de cilantro y mix de ajonjolí.",
-          },
-          {
-            name: "Ensalada de Salmón Teriyaki",
-            price: "$96.000",
-            desc: "Salmón sellado en salsa teriyaki, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, aguacate, mix de ajonjolí, puerro caramelizado y vinagreta de cilantro.",
-          },
-          {
-            name: "Ensalada de Pollo Agridulce",
-            price: "$52.000",
-            desc: "Salteado de pollo en salsa agridulce, tomates cherry en mantequilla de panela, mezcla de lechugas, zanahoria, cebolla encurtida, aguacate, parmesano, vinagreta de cilantro y mix de ajonjolí.",
-          },
-        ],
-      },
-      {
-        name: "Adiciones",
-        items: [
-          { name: "Papas al limón y romero", price: "$16.000" },
-          { name: "Papas casco", price: "$16.000" },
-          { name: "Patacones con hogao y guacamole", price: "$16.000" },
-          { name: "Ensalada fresca", price: "$16.000" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "pizzas",
-    name: "Pizzas",
-    emoji: "🍕",
-    note: "Masa artesanal tipo italiana, 72 horas de maduración, salsa pomodoro de la casa y especias. Se pueden terminar en la mesa con ajo en polvo, orégano y aceite de oliva (opcional).",
-    groups: [
-      {
-        items: [
-          {
-            name: "Pizza Vegetariana",
-            price: "$58.000",
-            desc: "Champiñones, tomates cherry, almendras garapiñadas, reducción de vino tinto, mizclum, queso parmesano y mozzarella.",
-          },
-          {
-            name: "Pizza Pulled Pork",
-            price: "$61.000",
-            desc: "Pulled pork en BBQ de chamoy de la casa, mermelada de tocino, rúgula y queso mozzarella.",
-          },
-          {
-            name: "Pizza Chicharrón",
-            price: "$61.000",
-            desc: "Chicharrón caramelizado, cilantro, queso parmesano rallado y queso mozzarella.",
-          },
-          {
-            name: "Pizza Pollo Trufado",
-            price: "$61.000",
-            desc: "Salsa pomodoro, tomates frescos y hierbas aromáticas, salteado de pollo trufado, tocineta ahumada, variedad de setas y parmesano rallado.",
-          },
-          {
-            name: "Pizza Mediterránea",
-            price: "$100.000",
-            desc: "Base pesto y mozzarella, chorizo español y pepperoni, jamón serrano y queso paipa, con borde relleno de queso (mozzarella y queso crema).",
-          },
-          {
-            name: "Adición de Borde de Queso",
-            price: "$19.000",
-            desc: "Queso crema, queso mozzarella.",
+            name: "Octopus",
+            price: "$54.000",
+            desc: "Mezcla de sabores de mar (pulpo, cangrejo), salsa ryu, queso crema, aguacate, quinoa crocante, salsa teriyaki y flor comestible.",
           },
         ],
       },
     ],
   },
+
+  // ── 7. MENÚ INFANTIL ──
   {
     id: "infantil",
     name: "Menú Infantil",
-    emoji: "🧒",
     note: "Para niños menores de 12 años.",
     groups: [
       {
@@ -437,10 +448,11 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+
+  // ── 8. POSTRES ──
   {
     id: "postres",
     name: "Postres",
-    emoji: "🍰",
     groups: [
       {
         items: [
@@ -452,12 +464,12 @@ export const menu: MenuCategory[] = [
           {
             name: "Milhoja",
             price: "$36.000",
-            desc: "Hojaldre relleno de crema pastelera, crema bowling y arequipe sobre espejo de durazno, fresa en mermelada de mora caliente y arequipe.",
+            desc: "Finas hojas de hojaldre sobrepuestas rellenas de crema pastelera, crema bowling y arequipe sobre espejo de durazno, fresa bañada en mermelada de mora caliente y arequipe.",
           },
           {
             name: "Galleta con helado",
             price: "$34.000",
-            desc: "Galleta melcochuda con trozos de chocolate y nueces bañada en salsa de chocolate, con gelato de vainilla.",
+            desc: "Galleta melcochuda con trozos de chocolate y nueces bañada en salsa de chocolate, acompañada de un gelato de vainilla.",
           },
           {
             name: "Fantasía de colores",
@@ -467,16 +479,17 @@ export const menu: MenuCategory[] = [
           {
             name: "Postre Super Bowling",
             price: "$67.000",
-            desc: "Bizcocho de chocolate, caramelo, gelato y ganache, recubierto con nuestro icónico cilindro de chocolate amargo, balanceado en nieve de dulzura.",
+            desc: "Bizcocho de chocolate, caramelo, gelato y ganache de chocolate recubierto con nuestro icónico cilindro de chocolate amargo, perfectamente balanceado en nieve de dulzura.",
           },
         ],
       },
     ],
   },
+
+  // ── 9. COCTELERÍA (autor, clásicos, gin & tonic, mocktails) ──
   {
     id: "cocteles",
-    name: "Cócteles",
-    emoji: "🍸",
+    name: "Coctelería",
     note: "Coctelería de autor y clásicos. Pregunta por nuestros rituales: Fuego, Niebla y Ahumado.",
     groups: [
       {
@@ -637,15 +650,8 @@ export const menu: MenuCategory[] = [
           },
         ],
       },
-    ],
-  },
-  {
-    id: "sin-alcohol",
-    name: "Sin Alcohol",
-    emoji: "🧃",
-    groups: [
       {
-        name: "Mocktails",
+        name: "Mocktails (sin alcohol)",
         items: [
           { name: "Passion Mule", price: "$32.000", desc: "Elixir de maracuyá, zumo de limón y Mil 976 ginger beer." },
           { name: "Coco Lychee", price: "$35.000", desc: "Extracto de lychees, zumo de piña y crema de coco." },
@@ -653,74 +659,13 @@ export const menu: MenuCategory[] = [
           { name: "Red Bull Limonade", price: "$37.000", desc: "Red Bull granizado con limón e infusión de hibiscus." },
         ],
       },
-      {
-        name: "Sodas saborizadas",
-        items: [
-          { name: "Maracuyá Hierbabuena", price: "$20.000" },
-          { name: "Jengibre Albahaca", price: "$20.000" },
-          { name: "Frutos Rojos Romero", price: "$20.000" },
-        ],
-      },
-      {
-        name: "Malteadas, jugos y limonadas",
-        items: [
-          { name: "Malteada de Vainilla", price: "$34.000" },
-          { name: "Malteada de Chocolate", price: "$34.000" },
-          { name: "Jugo de temporada", price: "$15.000" },
-          { name: "Limonada de coco", price: "$18.000" },
-          { name: "Limonada de hierbabuena", price: "$15.000" },
-          { name: "Limonada natural", price: "$15.000" },
-        ],
-      },
-      {
-        name: "Cafés",
-        items: [
-          { name: "Espresso", price: "$11.000" },
-          { name: "Americano", price: "$11.000" },
-          { name: "Capuchino", price: "$15.000" },
-          { name: "Latte", price: "$15.000" },
-          { name: "Carajillo", price: "$35.000", tags: ["Dulce"], desc: "Licor 43, espresso." },
-        ],
-      },
     ],
   },
+
+  // ── 10. LICORES (whisky, vodka, ginebra, tequila, ron, mezcal, cognac, aguardiente, vinos, champaña, cervezas) ──
   {
-    id: "cervezas-gaseosas",
-    name: "Cervezas & Gaseosas",
-    emoji: "🍺",
-    groups: [
-      {
-        name: "Cervezas",
-        items: [
-          { name: "Corona", price: "$22.000" },
-          { name: "Stella Artois", price: "$22.000" },
-          { name: "Club Colombia Dorada", price: "$20.000" },
-          { name: "Cusqueña", price: "$20.000" },
-          { name: "Heineken", price: "$18.000" },
-        ],
-      },
-      {
-        name: "Pasantes y gaseosas",
-        items: [
-          { name: "Red Bull", price: "$24.000" },
-          { name: "Red Bull Sugarfree", price: "$24.000" },
-          { name: "Red Bull Red Edition", price: "$24.000" },
-          { name: "Pepsi / Pepsi Zero", price: "$11.000" },
-          { name: "Colombiana / Sin Azúcar", price: "$11.000" },
-          { name: "Soda Bretaña", price: "$11.000" },
-          { name: "Tónica / Ginger Ale (Canada Dry)", price: "$11.000" },
-          { name: "Agua Hatsu / Hatsu Gas", price: "$11.000" },
-          { name: "Té 976 (Blanco, Negro, Amarillo, Violeta)", price: "$15.000" },
-          { name: "Mil976 (Indi, Ocean, Ginger Beer, Pink, Jengibre Limón)", price: "$20.000" },
-          { name: "San Pellegrino", price: "$28.000" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "destilados",
-    name: "Destilados & Vinos",
-    emoji: "🥃",
+    id: "licores",
+    name: "Licores",
     note: "Servicio por botella (B) y por trago (T).",
     groups: [
       {
@@ -780,7 +725,8 @@ export const menu: MenuCategory[] = [
           { name: "Jimador Blanco", price: "B $360.000 · T $36.000" },
           { name: "Jimador Reposado", price: "B $380.000 · T $38.000" },
           { name: "Jimador Cristalino", price: "B $520.000 · T $52.000" },
-          { name: "Cazadores Silver / Reposado", price: "B $340.000 · T $34.000" },
+          { name: "Cazadores Silver", price: "B $340.000 · T $34.000" },
+          { name: "Cazadores Reposado", price: "B $340.000 · T $34.000" },
           { name: "Don Julio Blanco", price: "B $760.000 · T $76.000" },
           { name: "Don Julio Reposado", price: "B $800.000 · T $80.000" },
           { name: "Don Julio 70", price: "B $980.000 · T $98.000" },
@@ -818,7 +764,7 @@ export const menu: MenuCategory[] = [
         ],
       },
       {
-        name: "Champagne",
+        name: "Champaña",
         items: [
           { name: "Veuve Clicquot Brut", price: "B $1.029.000" },
           { name: "Dom Pérignon Brut", price: "B $2.420.000" },
@@ -826,6 +772,70 @@ export const menu: MenuCategory[] = [
           { name: "JP Chenet Rosé", price: "B $220.000" },
           { name: "Chandon Brut", price: "B $290.000" },
           { name: "Chandon Rosé", price: "B $315.000" },
+        ],
+      },
+      {
+        name: "Cervezas",
+        note: "Servicio por botella.",
+        items: [
+          { name: "Corona", price: "$22.000" },
+          { name: "Stella Artois", price: "$22.000" },
+          { name: "Club Colombia Dorada", price: "$20.000" },
+          { name: "Cusqueña", price: "$20.000" },
+          { name: "Heineken", price: "$18.000" },
+        ],
+      },
+    ],
+  },
+
+  // ── 11. SIN ALCOHOL (sodas, malteadas, jugos, limonadas, cafés, pasantes) ──
+  {
+    id: "sin-alcohol",
+    name: "Sin Alcohol",
+    groups: [
+      {
+        name: "Sodas saborizadas",
+        items: [
+          { name: "Maracuyá Hierbabuena", price: "$20.000" },
+          { name: "Jengibre Albahaca", price: "$20.000" },
+          { name: "Frutos Rojos Romero", price: "$20.000" },
+        ],
+      },
+      {
+        name: "Malteadas, jugos y limonadas",
+        items: [
+          { name: "Malteada de Vainilla", price: "$34.000" },
+          { name: "Malteada de Chocolate", price: "$34.000" },
+          { name: "Jugo de temporada", price: "$15.000" },
+          { name: "Limonada de coco", price: "$18.000" },
+          { name: "Limonada de hierbabuena", price: "$15.000" },
+          { name: "Limonada natural", price: "$15.000" },
+        ],
+      },
+      {
+        name: "Cafés",
+        items: [
+          { name: "Espresso", price: "$11.000" },
+          { name: "Americano", price: "$11.000" },
+          { name: "Capuchino", price: "$15.000" },
+          { name: "Latte", price: "$15.000" },
+          { name: "Carajillo", price: "$35.000", tags: ["Dulce"], desc: "Licor 43, espresso." },
+        ],
+      },
+      {
+        name: "Pasantes y gaseosas",
+        items: [
+          { name: "Red Bull", price: "$24.000" },
+          { name: "Red Bull Sugarfree", price: "$24.000" },
+          { name: "Red Bull Red Edition", price: "$24.000" },
+          { name: "Pepsi / Pepsi Zero", price: "$11.000" },
+          { name: "Colombiana / Sin Azúcar", price: "$11.000" },
+          { name: "Soda Bretaña", price: "$11.000" },
+          { name: "Tónica / Ginger Ale (Canada Dry)", price: "$11.000" },
+          { name: "Agua Hatsu / Hatsu Gas", price: "$11.000" },
+          { name: "Té 976 (Blanco, Negro, Amarillo, Violeta)", price: "$15.000" },
+          { name: "Mil976 (Indi, Ocean, Ginger Beer, Pink, Jengibre Limón)", price: "$20.000" },
+          { name: "San Pellegrino", price: "$28.000" },
         ],
       },
     ],

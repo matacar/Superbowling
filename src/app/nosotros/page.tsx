@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const offerings: { title: string; desc: string }[] = [
   { title: "Bolera", desc: "16 pistas profesionales con neón y zonas lounge." },
-  { title: "Restaurante & bar", desc: "Cocina de Asia y parrilla, sushi de autor y coctelería ritual." },
+  { title: "Restaurante & bar", desc: "Parrilla y ahumados a la leña, sushi de autor, pizzas y coctelería." },
   { title: "Ahumados & parrilla", desc: "Cortes importados y ahumados de leña por horas." },
   { title: "Hachas", desc: "Lanzamiento de hachas para sacar al guerrero que llevas dentro." },
   { title: "Billares", desc: "Mesas para una partida tranquila o un torneo entre amigos." },

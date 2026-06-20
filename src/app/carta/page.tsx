@@ -4,7 +4,7 @@ import MenuView from "@/components/menu/MenuView";
 export const metadata: Metadata = {
   title: "Carta",
   description:
-    "La carta de Super Bowling Medellín: cortes a la parrilla, sushi rolls, okonomiyaki, pizzas de masa madre, coctelería de autor y más. Cocina salvaje, premium.",
+    "La carta de Super Bowling Medellín: parrilla y ahumados a la leña, cortes importados, sushi de autor, pizzas artesanales, coctelería y bar. Cocina salvaje, premium.",
 };
 
 export default function CartaPage() {
@@ -18,7 +18,8 @@ export default function CartaPage() {
           La <span className="text-shine">carta</span>
         </h1>
         <p className="mt-4 text-muted">
-          Cocina de Asia y parrilla, ahumados de leña, sushi de autor y coctelería ritual.
+          Cocina a la leña: parrilla, ahumados y cortes. Más sushi de autor, pizzas
+          artesanales y coctelería de la tribu.
         </p>
       </header>
 

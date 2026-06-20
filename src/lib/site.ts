@@ -13,7 +13,7 @@ export const site = {
   tagline: "El lugar premium de bolos y comida de Medellín",
   slogan: "Experiencias Salvajes", // eslogan del grupo
   description:
-    "16 pistas profesionales, restaurante con cocina de Asia y parrilla, bar de cócteles y eventos. Reserva tu pista en línea.",
+    "16 pistas profesionales, restaurante de parrilla y ahumados a la leña, sushi de autor, pizzas, bar de cócteles y eventos. Reserva tu pista en línea.",
 
   // ── Negocio (confirmado por investigación) ──
   lanes: 16, // pistas Brunswick (apertura ago. 2021)

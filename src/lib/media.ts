@@ -35,7 +35,7 @@ export const foodPhotos: Photo[] = [
   p("Restaurante_aereo.jpg", "Vista aérea del restaurante de Super Bowling"),
   p("Comida.jpg", "Plato de la cocina de Super Bowling"),
   p("Comidas-2.jpg", "Selección de platos de la carta"),
-  p("Comidas-3.jpg", "Más platos de la cocina de Asia y parrilla"),
+  p("Comidas-3.jpg", "Más platos de la parrilla y la cocina de la casa"),
   p("Restaurante.jpg", "Zona de restaurante y bar de Super Bowling"),
 ];
 
